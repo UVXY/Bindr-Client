@@ -11,16 +11,16 @@ import WordRoulette from "../screens/WordRoulette";
 import PicturePicker from "../screens/PicturePicker"
 
 const HomeStack = createStackNavigator({
+  Words: WordSearcher,
+  Roulette: WordRoulette,
+  Picture: PicturePicker,
   Home: HomeScreen,
   BookDetail: {
     screen: BookDetail,
     //======================================================
     // where is it coming from
     path: "/detail"
-  },
-  Words: WordSearcher,
-  Roulette: WordRoulette,
-  Picture: PicturePicker
+  }
 });
 
 HomeStack.navigationOptions = {

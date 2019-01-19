@@ -6,7 +6,15 @@ import { NavigationActions } from "react-navigation";
 export default class WordRoulette extends Component {
   // static navigationOptions = {
   //   header: null,
-  // };
+	// };
+	goToRoulette = (userObj) => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: "Home",
+			params: { data: userObj }
+		});
+		this.props.navigation.dispatch(navigateAction);
+		// this.props.navigation.goBack();
+	}
   reeler(){
     const SLOTS_PER_REEL = 12;
 // radius = Math.round( ( panelWidth / 2) / Math.tan( Math.PI / SLOTS_PER_REEL ) ); 

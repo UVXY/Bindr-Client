@@ -12,7 +12,7 @@ export default class SignInScreen extends Component {
 
     goToMain = (userObj) => {
       const navigateAction = NavigationActions.navigate({
-        routeName: "Home",
+        routeName: "Words",
         params: { data: userObj }
       });
       this.props.navigation.dispatch(navigateAction);
