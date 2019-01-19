@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Container, Header, Item, Input, Icon, Button, Text, Left } from 'native-base';
+import { View, Button } from 'react-native';
+import { Container, Header, Item, Input, Icon, Text, Left } from 'native-base';
 
 export default SearchBar = (props) => {
     return (
@@ -19,8 +19,8 @@ export default SearchBar = (props) => {
             {/* <Icon name="ios-people" /> */}
           </Item>
           <Button 
-            transparent
             onPress={props.search}
+            title="Go"
           >
             <Text>Search</Text>
           </Button>
