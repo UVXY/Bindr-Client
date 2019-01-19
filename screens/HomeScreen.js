@@ -16,6 +16,7 @@ import {
 import API from "../utils/API";
 import SearchBar from '../components/SearchBar';
 import BookCard from '../components/BookCard';
+import Header from '../components/Header';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -103,11 +104,12 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar 
+        <Header />
+        {/* <SearchBar 
           handleInputChange={this.handleInputChange} 
           search={this.searchBook}
           logout={this.logout}
-        />
+        /> */}
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
          {this.state.books.map(book => {
@@ -116,7 +118,6 @@ export default class HomeScreen extends React.Component {
           )}
          )}
         </ScrollView>
-
       </View>
     );
   }
