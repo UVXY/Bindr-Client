@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Image, View } from "react-native"; 
-import { Container, Header, Content, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
+import { Container, Header, Content, Body, Icon, Title, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
 import { NavigationActions } from "react-navigation";
 import { ImagePicker, Permissions } from 'expo';
 import API from "../../utils/API";
 
 export default class SignUp extends Component {
+    static navigationOptions = {
+      header: null,
+    };
 
     state = {
         username: '',
@@ -63,6 +66,15 @@ export default class SignUp extends Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Body>
+            <Title style={{ fontSize: 38 }}> Bindr 
+              <Icon style={{ fontSize: 42, color: "#ffffff" }}
+                name="book" />
+            </Title>
+          </Body>
+        </Header>
+
         <Content>
           <Form>
             <Item floatingLabel>

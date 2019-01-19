@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { View, Button, TextInput } from "react-native";
 import { NavigationActions } from "react-navigation";
-import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
+import { Container, Header, Content, Body, Icon, Title, Form, Item, Input, Label } from 'native-base';
 import API from "../../utils/API";
 
 export default class SignInScreen extends Component {
+    static navigationOptions = {
+      header: null,
+    };
+
     state = {
         username: '',
         password: ''
@@ -36,6 +40,15 @@ export default class SignInScreen extends Component {
   render(){
     return (
       <Container>
+        <Header>
+          <Body>
+            <Title style={{ fontSize: 38 }}> Bindr 
+              <Icon style={{ fontSize: 42, color: "#ffffff" }}
+                name="book" />
+            </Title>
+          </Body>
+        </Header>
+
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
