@@ -20,6 +20,6 @@ export default {
         return axios.post(`${baseUrl}/api/book/` + userId, bookObj)
     },
     getUserBooks: (userId) => {
-        return axios.get(`${baseUrl}/api/book/` + userId)
+        return axios.get(`${baseUrl}/api/book/saved/` + userId)
     }
 }

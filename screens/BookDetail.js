@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Linking } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Body, Right } from 'native-base';
 
 export default class BookDetail extends Component {
   // static navigationOptions = {
@@ -8,7 +8,7 @@ export default class BookDetail extends Component {
   // };
 
   render() {
-    const { title, infoLink, description, imageLinks, subtitle } = this.props.navigation.state.params.data
+    const { title, summary, imageLinks, subtitle } = this.props.navigation.state.params.data
     // console.log(this.props.navigation.state.params.data)
     return (
         <Container>
@@ -28,7 +28,7 @@ export default class BookDetail extends Component {
               <Body>
                 <Image source={{uri: imageLinks.thumbnail}} resizeMode='contain' resizeMethod='scale' style={{flex: 1, width: '100%', height: 250}} />
                 <Text style={{marginTop: '4%'}}>
-                  Synposis: {description}
+                  Synopsis: {summary}
                 </Text>
               </Body>
               
