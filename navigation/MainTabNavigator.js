@@ -6,6 +6,26 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
+import RecommendationScreen from '../screens/Recommendations';
+
+// FOR TESTING
+const RecommendationStack = createStackNavigator({
+  Recommendation: RecommendationScreen
+});
+
+RecommendationStack.navigationOptions = {
+  tabBarLabel: 'Recommendations',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  )
+};
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -26,25 +46,26 @@ HomeStack.navigationOptions = {
           : 'md-information-circle'
       }
     />
-  ),
+  )
 };
 
 const MyFavoritesStack = createStackNavigator({
-  MyFavorites: MyFavorites,
+  Saved: MyFavorites
 });
 
 MyFavoritesStack.navigationOptions = {
-  tabBarLabel: 'MyFavorites',
+  tabBarLabel: 'Saved',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
-  ),
+  )
 };
 
 
 export default createBottomTabNavigator({
   HomeStack,
-  MyFavoritesStack
+  MyFavoritesStack,
+  RecommendationStack
 });
