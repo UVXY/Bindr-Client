@@ -8,10 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Container, Content, Card, CardItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
-
 import axios from "axios";
-import Drawer from '../components/Drawer';
 
 import {
   NavigationActions
@@ -20,7 +17,6 @@ import API from "../utils/API";
 import SearchBar from '../components/SearchBar';
 import BookCard from '../components/BookCard';
 import Header from '../components/Header';
-import SideBar from '../components/SideBar';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -115,13 +111,12 @@ export default class HomeScreen extends React.Component {
           logout={this.logout}
         /> */}
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        
+
          {this.state.books.map(book => {
           return (
              <BookCard key={book.id} data={book.volumeInfo} bookDetail={this.bookDetail} save={this.saveBook}/>
           )}
          )}
-         <Drawer/>
         </ScrollView>
       </View>
     );
