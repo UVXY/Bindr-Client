@@ -8,13 +8,16 @@ import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
 import WordSearcher from "../screens/WordSearcher";
 import WordRoulette from "../screens/WordRoulette";
-import PicturePicker from "../screens/PicturePicker"
+import PicturePicker from "../screens/PicturePicker";
+// recommendations currently breaks the app do to swipe
+// import Recommendations from "../screens/Recommendations"
 
 const HomeStack = createStackNavigator({
   Words: WordSearcher,
   Roulette: WordRoulette,
   Picture: PicturePicker,
   Home: HomeScreen,
+  // Recommendations: Recommendations,
   BookDetail: {
     screen: BookDetail,
     //======================================================
