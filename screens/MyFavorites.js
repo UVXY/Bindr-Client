@@ -1,47 +1,68 @@
 import React, { Component } from 'react';
-import { WebView, Platform, Text, View, ScrollView, StyleSheet } from 'react-native';
-import { Container, Content, Thumbnail, H1 } from "native-base";
-import API from "../utils/API";
+import {
+  Platform, View, ScrollView, StyleSheet
+} from 'react-native';
+import {
+  Thumbnail, H1
+} from 'native-base';
+import API from '../utils/API';
 import BookCard from '../components/BookCard';
+<<<<<<< HEAD
 import Header from "../components/Header";
 // import SideBar from '../components/SideBar';
 
+=======
+import Header from '../components/Header';
+>>>>>>> b1e3113aa9c7a51fa2bdb49e47bbb9d1ffbf0aea
 
 export default class MyFavorites extends Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
 
-  state ={
-    books: []
+  state = {
+    books: [],
+    userName: 'Unknown',
+    userImage: null
   }
-  
-  componentDidMount(){
-    
+
+  componentWillMount() {
     API.getUser()
-    .then(res => {
-      this.getBooks(res.data.user._id)
-    })
+      .then((res) => {
+        this.setState({
+          userImage: res.data.photo,
+          userName: res.data.firstName
+        });
+        this.getBooks(res.data._id);
+      });
   }
 
   getBooks = (id) => {
     API.getUserBooks(id)
-    .then(res => this.setState({books: res.data.book}))
+      .then(res => this.setState({ books: res.data.saved }));
   }
 
   render() {
+    const { userName, userImage, books } = this.state;
+
     return (
       <View style={styles.container}>
         <Header />
-          <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} >
-            <Thumbnail large source={{uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fsample_native_app-0cf4d551-a506-47f6-996d-85ce02e8ca0b/ImagePicker/caf679dd-d953-4cab-aef2-8351f98842b7.jpg"}} />
-            <H1>User name</H1>
-            {this.state.books.map(book => {
-              return (
-                <BookCard key={book.id} data={book}/>
-              )}
-            )}
-          </ScrollView>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <Thumbnail
+            large
+            source={
+              userImage
+                ? { uri: userImage }
+                : require('../assets/images/reader-310398_640.png')
+            }
+          />
+
+          <H1>{userName}'s Saved Books</H1>
+          {books.map(book => (
+            <BookCard key={book.id} data={book} />
+          ))}
+        </ScrollView>
       </View>
     );
   }
@@ -49,51 +70,20 @@ export default class MyFavorites extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+    backgroundColor: '#fff'
   },
   contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 70
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: 'rgba(96,100,109, 0.8)'
   },
   codeHighlightContainer: {
     backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
+    paddingHorizontal: 4
   },
   tabBarInfoContainer: {
     position: 'absolute',
@@ -105,33 +95,22 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
     alignItems: 'center',
     backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
     color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+    marginTop: 5
+  }
 });

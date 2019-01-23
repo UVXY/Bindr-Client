@@ -26,7 +26,11 @@ export default {
         // return axios.post(`${baseUrl}/api/book/` + userId, bookObj)
     },
     getUserBooks: (userId) => {
+<<<<<<< HEAD
         return axios.get("http://localhost:3001/api/book/" + userId)
         // return axios.get(`${baseUrl}/api/book/` + userId)
+=======
+        return axios.get(`${baseUrl}/api/book/saved/` + userId)
+>>>>>>> b1e3113aa9c7a51fa2bdb49e47bbb9d1ffbf0aea
     }
 } 
