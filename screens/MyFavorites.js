@@ -33,7 +33,7 @@ export default class MyFavorites extends Component {
 
   getBooks = () => {
     API.getUserBooks()
-      .then(res => this.setState({ books: res.data.saved }));
+      .then(res => this.setState({ books: res.data.savedBooks }));
   }
 
   render() {
