@@ -11,7 +11,7 @@ import Header from '../components/Header';
 
 export default class MyFavorites extends Component {
   static navigationOptions = {
-    header: null
+    header: Header
   };
 
   state = {
@@ -27,12 +27,12 @@ export default class MyFavorites extends Component {
           userImage: res.data.photo,
           userName: res.data.firstName
         });
-        this.getBooks(res.data._id);
+        this.getBooks();
       });
   }
 
-  getBooks = (id) => {
-    API.getUserBooks(id)
+  getBooks = () => {
+    API.getUserBooks()
       .then(res => this.setState({ books: res.data.saved }));
   }
 
@@ -41,7 +41,6 @@ export default class MyFavorites extends Component {
 
     return (
       <View style={styles.container}>
-        <Header />
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <Thumbnail
             large
@@ -54,7 +53,7 @@ export default class MyFavorites extends Component {
 
           <H1>{userName}'s Saved Books</H1>
           {books.map(book => (
-            <BookCard key={book.id} data={book} />
+            <BookCard data={book} unsave={API.unsaveBook} handler={this.getBooks} />
           ))}
         </ScrollView>
       </View>
@@ -64,12 +63,11 @@ export default class MyFavorites extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#fff'
   },
   contentContainer: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 70
+    padding: 10
   },
   codeHighlightText: {
     color: 'rgba(96,100,109, 0.8)'
