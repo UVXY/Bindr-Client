@@ -6,10 +6,27 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
-import TestScreen from "../screens/TestScreen";
+import RecommendationScreen from '../screens/Recommendations';
 import Surveys from "../screens/Surveys"
-// recommendations currently breaks the app do to swipe
-// import Recommendations from "../screens/Recommendations"
+
+// FOR TESTING
+const RecommendationStack = createStackNavigator({
+  Recommendation: RecommendationScreen
+});
+
+RecommendationStack.navigationOptions = {
+  tabBarLabel: 'Recommendations',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  )
+};
 
 const HomeStack = createStackNavigator({
   Test: TestScreen,
@@ -34,7 +51,7 @@ HomeStack.navigationOptions = {
           : 'md-information-circle'
       }
     />
-  ),
+  )
 };
 const SurveysStack = createStackNavigator({
   Survey: Surveys,
@@ -51,22 +68,23 @@ SurveysStack.navigationOptions = {
 };
 
 const MyFavoritesStack = createStackNavigator({
-  MyFavorites: MyFavorites,
+  Saved: MyFavorites
 });
 
 MyFavoritesStack.navigationOptions = {
-  tabBarLabel: 'MyFavorites',
+  tabBarLabel: 'Saved',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
-  ),
+  )
 };
 
 
 export default createBottomTabNavigator({
   HomeStack,
   MyFavoritesStack,
-  SurveysStack
+  SurveysStack,
+  RecommendationStack
 });

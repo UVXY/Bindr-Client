@@ -11,23 +11,16 @@ import Roulette from '../components/Roulette';
  
 
 export default class CardShowcaseExample extends Component {
-  // static navigationOptions = {
-  //   header: null,
-  // };
-    // this.props.navigation.goBack();
-//   }
-//   saveWord = (wordObj) => {
-    
-//     const { title } = wordObj;
-
-//     const newWord = {
-//       title
-//     }
-
-//     API.saveWord(newWord, this.state.user._id)
-//       .then(res => console.log(res))
-//       .catch(err => console.log(err))
-//   }
+  state = {
+    bookSearch: "",
+    books: [],
+    user: null
+  }
+  
+  handleInputChange = (search) => {
+    this.setState({bookSearch: search})
+  }
+  
   render() {
     return (
     <View style={styles.container}>
