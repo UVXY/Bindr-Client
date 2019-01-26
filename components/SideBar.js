@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 // import styles from './Sidebar.style';
+import { Container, Header, Content, Button} from 'native-base';
 import {NavigationActions} from 'react-navigation';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import { StackNavigator } from 'react-navigation';
@@ -15,42 +16,22 @@ class SideBar extends Component {
 
   render () {
     return (
+      
       <View >
         <ScrollView style={styles.container}>
-          <View>
-            <Text>
-              Section 1
-            </Text>
-            <View style={styles.navSectionStyle}>
-              <Text>
-              Page1
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Text>
-              Section 2
-            </Text>
-            <View style={styles.navSectionStyle}>
-              <Text>
-                Page2
-              </Text>
-              <Text>
-                Page3
-              </Text>
-            </View>            
-          </View>
-          <View><Text>Section 3</Text>
-            <View style={styles.navSectionStyle}>
-              <Text>
-              Page4
-              </Text>
-            </View>
-          </View>
+        {/* <Text style={styles.text}>Side Menu</Text> */}
+          <Button style={styles.button} block light><Text> Light </Text></Button>
+          <Button style={styles.button} block primary><Text> Primary </Text></Button>
+          <Button style={styles.button} block success><Text> Success </Text></Button>
+          <Button style={styles.button} block info><Text> Info </Text></Button>
+          <Button style={styles.button} block warning><Text> Warning </Text></Button>
+          <Button style={styles.button} block danger><Text> Danger </Text></Button>
+          <Button style={styles.button} block dark><Text> Dark </Text></Button>
+            
         </ScrollView>
-        <View style={styles.footerContainer}>
+        {/* <View style={styles.footerContainer}>
           <Text>This is my fixed footer</Text>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -64,18 +45,25 @@ export default SideBar;
 
 const styles = StyleSheet.create({
     container: {
-      paddingTop: 20,
-      flex: 1
+      flex: 1,
+      backgroundColor: "#000",
+      marginRight: 5,
     },
-    navItemStyle: {
-      padding: 10
+    text: {
+      color: "#fff",
+      marginTop: 50,
+      marginLeft: 10,
     },
-    navSectionStyle: {
-      backgroundColor: 'lightgrey'
+    sideImage: {
+      width: "100%",
+      height: 100,
+      margin: 10,
+      opacity: 0.7,
     },
-    sectionHeadingStyle: {
-      paddingVertical: 10,
-      paddingHorizontal: 5
+    button: {
+      marginTop: 20,
+      marginRight: 10,
+      marginLeft: 10,
     },
     footerContainer: {
       padding: 20,

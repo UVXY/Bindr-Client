@@ -7,14 +7,14 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 export default class BookDetail extends Component {
-    // goToRoulette = (userObj) => {
-    //     const navigateAction = NavigationActions.navigate({
-    //       routeName: "Words",
-    //       params: { data: userObj }
-    //     });
-    //     this.props.navigation.dispatch(navigateAction);
-    //     // this.props.navigation.goBack();
-    //   }
+    goToRoulette = (userObj) => {
+        const navigateAction = NavigationActions.navigate({
+          routeName: "Words",
+          params: { data: userObj }
+        });
+        this.props.navigation.dispatch(navigateAction);
+        // this.props.navigation.goBack();
+      }
   render() {
     return (
       <Container>

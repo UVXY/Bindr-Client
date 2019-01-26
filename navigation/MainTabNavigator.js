@@ -6,16 +6,13 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
-import WordSearcher from "../screens/WordSearcher";
-import WordRoulette from "../screens/WordRoulette";
-import PicturePicker from "../screens/PicturePicker";
+import TestScreen from "../screens/TestScreen";
+import Surveys from "../screens/Surveys"
 // recommendations currently breaks the app do to swipe
 // import Recommendations from "../screens/Recommendations"
 
 const HomeStack = createStackNavigator({
-  Words: WordSearcher,
-  Roulette: WordRoulette,
-  Picture: PicturePicker,
+  Test: TestScreen,
   Home: HomeScreen,
   // Recommendations: Recommendations,
   BookDetail: {
@@ -39,6 +36,19 @@ HomeStack.navigationOptions = {
     />
   ),
 };
+const SurveysStack = createStackNavigator({
+  Survey: Surveys,
+});
+
+SurveysStack.navigationOptions = {
+  tabBarLabel: 'Survey',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
 
 const MyFavoritesStack = createStackNavigator({
   MyFavorites: MyFavorites,
@@ -57,5 +67,6 @@ MyFavoritesStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  MyFavoritesStack
+  MyFavoritesStack,
+  SurveysStack
 });
