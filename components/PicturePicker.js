@@ -9,8 +9,9 @@ import React, { Component } from 'react';
 import { Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Container, Header, Title, View } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-export default class LayoutExample extends Component {
-  render() {
+// export default class LayoutExample extends Component {
+export default Pictures = (props) => {
+  
     return (
       <Container>
           <ScrollView>
@@ -22,7 +23,7 @@ export default class LayoutExample extends Component {
               </Header>
           <Grid>
               <Row>
-              <TouchableOpacity onPress={this._onPressButton}>
+              <TouchableOpacity onPress={props.handleInputChange}>
             <Col style={{ backgroundColor: '#635DB7', height: 200 }}>
             <Image source={require('../assets/images/LazyPug.jpg')} style={{height: 200, width: null, flex: 1}}/>
             </Col>
@@ -80,4 +81,3 @@ export default class LayoutExample extends Component {
 //       color: 'red',
 //     },
 //   });
-}
