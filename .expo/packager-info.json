@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://ws-7fk.anonymous.bindr-client.exp.direct",
+  "packagerNgrokUrl": "https://packager.ws-7fk.anonymous.bindr-client.exp.direct",
+  "ngrokPid": 73773
 }

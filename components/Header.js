@@ -28,29 +28,12 @@ render(){
         ref={(ref) => { this.drawer = ref; }}
         content={<SideBar navigator={this.navigator} />}
         onClose={() => this.closeDrawer()}>
-    <Container>
-      <Header>
-      <Left>
+    <Header>
+    <Left>
             <Button transparent onPress={()=> this.openDrawer()}>
             <Icon name="menu"/>
             </Button>
             </Left>
-        <Body>
-          <Title style={{ fontSize: 38 }}>
-            {' '}
-            Bindr
-            <Icon style={{ fontSize: 42, color: '#ffffff' }} name="book" />
-          </Title>
-        </Body>
-        <Right>
-          <Button transparent>
-            <Icon style={{ fontSize: 30 }} name="search" />
-          </Button>
-        </Right>
-      </Header>
-    </Container>
-    </Drawer>
-    <Header>
       <Body>
         <Title style={{ fontSize: 38 }}>
           {' '}
@@ -64,6 +47,7 @@ render(){
         </Button>
       </Right>
     </Header>
+    </Drawer>
   );
 }}
 

@@ -25,7 +25,7 @@ export default class SignInScreen extends Component {
 
     signUp = () => {
         const navigateAction = NavigationActions.navigate({
-          routeName: "SignUp",
+          routeName: "Recommendations",
         });
         this.props.navigation.dispatch(navigateAction);
         // this.props.navigation.goBack();

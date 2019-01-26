@@ -29,7 +29,6 @@ RecommendationStack.navigationOptions = {
 };
 
 const HomeStack = createStackNavigator({
-  Test: TestScreen,
   Home: HomeScreen,
   // Recommendations: Recommendations,
   BookDetail: {
