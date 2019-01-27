@@ -19,20 +19,26 @@ export default class SignUp extends Component {
     }
 
     signUp = () => {
-        // deconstruct state object
-        const { username, password, firstName, lastName, photo } = this.state;
+      // deconstruct state object
+      const { username, password, firstName, lastName, photo } = this.state;
 
-        // create newUser object to be sent to database
-        const newUser = { username, password, firstName, lastName, photo };
+      // create newUser object to be sent to database
+      const newUser = {
+        username,
+        password,
+        firstName,
+        lastName,
+        photoUri: photo
+      };
 
-        API.registerUser(newUser)
-            .then(res => {
-                console.log("SUCCESSFUL SIGNUP")
-                this.handleLoginRedirect(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+      API.registerUser(newUser)
+          .then(res => {
+              console.log("SUCCESSFUL SIGNUP")
+              this.handleLoginRedirect(res.data)
+          })
+          .catch(err => {
+              console.log(err)
+          })
     }
 
     _pickImage = async () => {
@@ -42,6 +48,7 @@ export default class SignUp extends Component {
             let result = await ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
                 aspect: [4, 3],
+                base64: true
             });
     
             console.log(result);

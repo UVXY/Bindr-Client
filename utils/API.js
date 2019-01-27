@@ -14,7 +14,18 @@ export default {
     return axios.get(`${baseUrl}/api/user`);
   },
   registerUser: (userObj) => {
-    return axios.post(`${baseUrl}/auth/signup`, userObj);
+    const formData = new FormData();
+    formData.append('username', userObj.username);
+    formData.append('password', userObj.password);
+    formData.append('firstName', userObj.firstName);
+    formData.append('lastName', userObj.lastName);
+    formData.append('photo', userObj.photoUri);
+    console.log(formData);
+    return axios.post(
+      `${baseUrl}/auth/signup`,
+      formData,
+      { headers: { 'Content-Type': 'multipart/form-data' } }
+    );
   },
   saveBook: (bookId) => {
     return axios.post(`${baseUrl}/api/user/saved/` + bookId);
