@@ -15,12 +15,12 @@ export default class SignUp extends Component {
         password: '',
         firstName: '',
         lastName: '',
-        photo: ''
+        photoUri: ''
     }
 
     signUp = () => {
       // deconstruct state object
-      const { username, password, firstName, lastName, photo } = this.state;
+      const { username, password, firstName, lastName, photoUri } = this.state;
 
       // create newUser object to be sent to database
       const newUser = {
@@ -28,7 +28,7 @@ export default class SignUp extends Component {
         password,
         firstName,
         lastName,
-        photoUri: photo
+        photoUri
       };
 
       API.registerUser(newUser)
@@ -51,10 +51,8 @@ export default class SignUp extends Component {
                 base64: true
             });
     
-            console.log(result);
-    
             if (!result.cancelled) {
-                this.setState({ photo: result.uri });
+                this.setState({ photoUri: result.uri });
             }
         } else {
             throw new Error('Camera roll permission not granted');
