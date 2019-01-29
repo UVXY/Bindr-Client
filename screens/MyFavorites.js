@@ -55,7 +55,7 @@ export default class MyFavorites extends Component {
 
           <H1>{userName}'s Saved Books</H1>
           {books.map(book => (
-            <BookCard data={book} unsave={API.unsaveBook} handler={this.getBooks} />
+            <BookCard data={book} key={book._id} unsave={API.unsaveBook} handler={this.getBooks} />
           ))}
         </ScrollView>
       </View>
