@@ -7,25 +7,56 @@ import {
   ScrollView
 } from 'react-native';
 import PicturePicker from '../components/PicturePicker';
+import {NavigationActions} from 'react-navigation'
 import Roulette from '../components/Roulette';
- 
-
 export default class CardShowcaseExample extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+  // should all the words be stored in an array to later be stored?
   state = {
     bookSearch: "",
     books: [],
     user: null
   }
-  
-  handleInputChange = (search) => {
+
+  myFunction = () => {
+    console.log("Button was pressed")
+  }
+  searchBook = (event) => {
+    event.preventDefault();
+    axios
+    .get("https://www.googleapis.com/books/v1/volumes", { params: {q: this.state.bookSearch }})
+    .then((results) => {
+      console.log(results)
+      this.setState({ books: results.data.items });
+    })
+    .catch(err => console.log(err));
+  }
+  favorites = (searchObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Saved",
+      params: { data: searchObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+  handlePressChange = (search) => {
     this.setState({bookSearch: search})
   }
+  getSearch = () => {
+    API.getSearch(this.state)
+    .then(res => this.favorites(res.data))
+    .catch(err => console.log(err))
+    console.log(state);
+  } 
   
   render() {
     return (
     <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <PicturePicker/>
+            <Roulette/>
+            {/* <PicturePicker goBookDetail = {this.favorites}/> */}
         </ScrollView>
       </View>
     );

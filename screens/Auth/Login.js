@@ -16,7 +16,7 @@ export default class SignInScreen extends Component {
 
     goToMain = (userObj) => {
       const navigateAction = NavigationActions.navigate({
-        routeName: "Home",
+        routeName: "Survey",
         params: { data: userObj }
       });
       this.props.navigation.dispatch(navigateAction);
@@ -25,7 +25,7 @@ export default class SignInScreen extends Component {
 
     signUp = () => {
         const navigateAction = NavigationActions.navigate({
-          routeName: "Recommendations",
+          routeName: "SignUp",
         });
         this.props.navigation.dispatch(navigateAction);
         // this.props.navigation.goBack();

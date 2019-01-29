@@ -15,14 +15,14 @@ import {
   View,
 } from 'react-native';
 
-export default class HeaderMenu extends Component{
+export default function HeaderMenu() {
   closeDrawer = () => {
     this.drawer._root.close()
   };
   openDrawer = () => {
     this.drawer._root.open()
   };
-render(){
+
   return (
     <Drawer 
         ref={(ref) => { this.drawer = ref; }}
@@ -37,7 +37,7 @@ render(){
       <Body>
         <Title style={{ fontSize: 38 }}>
           {' '}
-          Bindr
+          Bindr 
           <Icon style={{ fontSize: 42, color: '#ffffff' }} name="book" />
         </Title>
       </Body>
@@ -49,5 +49,5 @@ render(){
     </Header>
     </Drawer>
   );
-}}
+};
 

@@ -1,95 +1,112 @@
-import React from 'react';
+import React, { Component } from 'react'
 import {
+    Text,
     View,
-    Button
+    Button,
+    StyleSheet
 } from 'react-native';
 import {
     Container,
     Header,
+    Content,
     Item,
     Input,
     Icon,
-    Text,
     Left
 } from 'native-base';
 
-export default Roulette = () => {
-    // export default class HeaderMenu extends Component{    
-    // check the testroulette folder
-    function createSlots(ring) {
+// export default class reactApp extends Component {
 
-        var slotAngle = 360 / SLOTS_PER_REEL;
+export default class HomeScreen extends React.Component {
 
-        var seed = getSeed();
-        console.log("This is " + seed);
-        for (var i = 0; i < SLOTS_PER_REEL; i++) {
-            var slot = document.createElement('div');
-            console.log("But " + seed);
-            slot.className = 'slot';
+    state = {
+        words: "Original text"
+      }
+     NumberOfWords = 28
 
-            // compute and assign the transform for this slot
-            var transform = 'rotateX(' + (slotAngle * i) + 'deg) translateZ(' + REEL_RADIUS + 'px)';
+    //  words = new BuildArray(NumberOfWords)
 
-            slot.style.transform = transform;
+    // Use the following variables to 
+    // define your random words:
+    // words[1] = "escapology"
+    // words[2] = "brightwork"
+    // words[3] = "verkrampte"
+    // words[4] = "protectrix"
+    // words[5] = "nudibranch"
+    // words[6] = "grandchild"
+    // words[7] = "newfangled"
+    // words[8] = "flugelhorn"
+    // words[9] = "mythologer"
+    // words[10] = "pluperfect"
+    // words[11] = "jellygraph"
+    // words[12] = "quickthorn"
+    // words[13] = "rottweiler"
+    // words[14] = "technician"
+    // words[15] = "cowpuncher"
+    // words[16] = "middlebrow"
+    // words[17] = "jackhammer"
+    // words[18] = "triphthong"
+    // words[19] = "wunderkind"
+    // words[20] = "dazzlement"
+    // words[21] = "jabberwock"
+    // words[22] = "witchcraft"
+    // words[23] = "pawnbroker"
+    // words[24] = "thumbprint"
+    // words[25] = "motorcycle"
+    // words[26] = "cryptogram"
+    // words[27] = "torchlight"
+    // words[28] = "bankruptcy"
 
-            // setup the number to show inside the slots
-            // the position is randomized to 
-
-            var content = $(slot).append('<p>' + ((seed + i) % 12) + '</p>');
-
-            // add the poster to the row
-            ring.append(slot);
+     updateText =() =>{
+        this.setState({words: 'My Changed Text'})
+     }
+     BuildArray =(size)=> {
+        this.length = size
+        for (var i = 1; i <= size; i++) {
+            this[i] = null
         }
+        return this
     }
 
-    function getSeed() {
-        // generate random number smaller than 13 then floor it to settle between 0 and 12 inclusive
-        // return Math.floor(Math.random() * (SLOTS_PER_REEL));
-        var wordRoulette = new Array("hello", "how", "are", "you", "am", "Well", "Up", "Down", "Cloudy", "Sunny", "Well");
-        return wordRoulette[Math.floor(Math.random() * wordRoulette.length)];
+    PickRandomWord=(frm)=>{
+        // Generate a random number between 1 and NumberOfWords
+        var rnd = Math.ceil(Math.random() * NumberOfWords)
 
+        // Display the word inside the text box
+        frm.WordBox.value = words[rnd]
     }
-
-    function spin(timer) {
-        //var txt = 'seeds: ';
-        for (var i = 1; i < 6; i++) {
-            var oldSeed = -1;
-            /*
-            checking that the old seed from the previous iteration is not the same as the current iteration;
-            if this happens then the reel will not spin at all
-            */
-            var oldClass = $('#ring' + i).attr('class');
-            if (oldClass.length > 4) {
-                // was parseInt
-                oldSeed = parseInt(oldClass.slice(10));
-                console.log(oldSeed);
-            }
-            var seed = getSeed();
-            while (oldSeed == seed) {
-                console.log("Fingers crossed " + seed);
-
-                seed = getSeed();
-            }
-            console.log("That's " + seed);
-
-            $('#ring' + i)
-                .css('animation', 'back-spin 1s, spin-' + seed + ' ' + (timer + i * 0.5) + 's')
-                .attr('class', 'ring spin-' + seed);
-        }
-
-        console.log('=====');
+    render() {
+    return (
+        <Container>
+            {/* <Input NAME="WordForm">  
+<INPUT TYPE=TEXT NAME="WordBox" id="wordbox">
+<INPUT TYPE=BUTTON VALUE="Generate" onClick="PickRandomWord(document.WordForm);" id="button">
+                 */}
+        <Header />
+        <Content>
+          {/* <Form>
+            <Item floatingLabel>
+              <Label>Username</Label>
+            </Item>
+            <Button onPress= {() => this.PickRandomWord}>
+            <Text> Press for Word </Text>
+            </Button>
+          </Form> */}
+          <Text style={styles.textContent} onPress = {this.updateText}>
+             {this.state.words}
+          </Text>
+        </Content>
+      </Container>   
+    );
     }
-    $(document).ready(function () {
-
-        // initiate slots
-        // if going to uncomment remember to float: left on .ring 
-        createSlots($('#ring1'));
-
-
-        // hook start button
-        $('.go').on('click', function () {
-            var timer = 2;
-            spin(timer);
-        })
-    });
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'green',
+    },
+    textContent: {
+        fontSize: 20,
+        color: 'red',
+    },
+})
