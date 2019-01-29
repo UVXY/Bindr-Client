@@ -16,14 +16,20 @@ import {
 } from 'native-base';
 
 // export default class reactApp extends Component {
-
-export default class HomeScreen extends React.Component {
+    let words = ["escapology", "brightwork", "verkrampte", "protectrix", "nudibranch", "grandchild", 
+    "newfangled", "flugelhorn", "mythologer", "pluperfect", "jellygraph", "quickthorn", "rottweiler", 
+    "technician", "cowpuncher", "middlebrow", "jackhammer", "triphthong", "wunderkind", "dazzlement", 
+    "jabberwock", "witchcraft", "pawnbroker", "thumbprint", "motorcycle", "cryptogram", "torchlight",
+    "bankruptcy"];
+    let NumberOfWords = 28
+    let words = new BuildArray(NumberOfWords)
+export default class HomeScreen extends Component {
 
     state = {
-        words: "Original text"
-      }
-     NumberOfWords = 28
-
+        words: "Original text",
+      };
+    // NumberOfWords = 28
+    
     //  words = new BuildArray(NumberOfWords)
 
     // Use the following variables to 
