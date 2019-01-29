@@ -55,7 +55,7 @@ export default class CardShowcaseExample extends Component {
     return (
     <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <Roulette/>
+            <PicturePicker/>
             {/* <PicturePicker goBookDetail = {this.favorites}/> */}
         </ScrollView>
       </View>

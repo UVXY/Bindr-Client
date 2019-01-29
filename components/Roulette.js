@@ -16,13 +16,13 @@ import {
 } from 'native-base';
 
 // export default class reactApp extends Component {
-    let words = ["escapology", "brightwork", "verkrampte", "protectrix", "nudibranch", "grandchild", 
+    let wordArr = ["escapology", "brightwork", "verkrampte", "protectrix", "nudibranch", "grandchild", 
     "newfangled", "flugelhorn", "mythologer", "pluperfect", "jellygraph", "quickthorn", "rottweiler", 
     "technician", "cowpuncher", "middlebrow", "jackhammer", "triphthong", "wunderkind", "dazzlement", 
     "jabberwock", "witchcraft", "pawnbroker", "thumbprint", "motorcycle", "cryptogram", "torchlight",
     "bankruptcy"];
     let NumberOfWords = 28
-    let words = new BuildArray(NumberOfWords)
+    // let wordArr = new BuildArray(NumberOfWords)
 export default class HomeScreen extends Component {
 
     state = {

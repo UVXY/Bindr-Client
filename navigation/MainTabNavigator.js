@@ -33,8 +33,6 @@ const HomeStack = createStackNavigator({
   // Recommendations: Recommendations,
   BookDetail: {
     screen: BookDetail,
-    //======================================================
-    // where is it coming from
     path: "/detail"
   }
 });
