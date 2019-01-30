@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated, Easing, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 import { Text } from 'native-base';
+
+const wordsearch = require('wordsearch');
 
 const width = 375;
 const height = 667;
@@ -13,26 +15,46 @@ const letterSize = Math.floor(tileSize * 0.75);
 
 export default class Board extends Component {
   state = {
-    selectedLetters: []
+    selectedLetters: [],
+    puzzleGrid: []
   }
 
-  checkValidSelection() {
-    console.log("TO DO")
+  componentWillMount() {
+    this.setState({
+      puzzleGrid: wordsearch(['rain', 'scary', 'happy'], 5, 5).grid
+    });
   }
 
-  handleLetterPress(letter) {
+  // checkValidSelection(position) {
+  //   if (this.selectedLetters === "" || )
+  // }
+
+  handleLetterPress(id, letter) {
     const { selectedLetters } = this.state;
-    selectedLetters.push(letter);
+    const index = selectedLetters.findIndex(checkArray => checkArray[1] === id);
+    if (index >= 0) {
+      selectedLetters.splice(index, 1);
+    } else {
+      selectedLetters.push([letter, id]);
+    }
     this.setState(selectedLetters);
     console.log(selectedLetters);
   }
 
-  renderTile(id, style, letter) {
+  renderTile(id, position, letter) {
+    const { selectedLetters } = this.state;
+    let isSelected = false;
+    if (selectedLetters.findIndex(checkArray => checkArray[1] === id) >= 0) {
+      isSelected = true;
+    }
     return (
       <Animated.View
         key={id}
-        style={[styles.tile, style]}
-        onStartShouldSetResponder={() => { this.handleLetterPress(letter); }}
+        style={isSelected
+          ? [styles.selectedTile, position]
+          : [styles.tile, position]
+        }
+        onStartShouldSetResponder={() => { this.handleLetterPress(id, letter); }}
       >
         <Text style={styles.letter}>
           {letter}
@@ -43,16 +65,15 @@ export default class Board extends Component {
 
   renderTiles() {
     const result = [];
-    // const search = wordsearch(['rain', 'scary', 'romance'], 5, 5);
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
         const id = row * size + col;
-        const letter = String.fromCharCode(65 + id);
-        const style = {
+        const letter = this.state.puzzleGrid[row][col];
+        const position = {
           left: col * cellSize + cellPadding,
           top: row * cellSize + cellPadding
         };
-        result.push(this.renderTile(id, style, letter));
+        result.push(this.renderTile(id, position, letter));
       }
     }
     return result;
@@ -81,6 +102,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#BEE1D2'
+  },
+  selectedTile: {
+    position: 'absolute',
+    width: tileSize,
+    height: tileSize,
+    borderRadius,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e1bedc'
   },
   letter: {
     color: '#333',
