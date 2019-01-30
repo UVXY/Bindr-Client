@@ -6,7 +6,8 @@ const wordsearch = require('wordsearch');
 
 const width = 375;
 const height = 667;
-const size = 5; // five by five grid
+const gridWidth = 5;
+const gridHeight = 7;
 const cellSize = Math.floor(width * 0.2); // 20% of the screen width
 const cellPadding = Math.floor(cellSize * 0.05); // 5% of the cell size
 const borderRadius = cellPadding * 2;
@@ -20,14 +21,16 @@ export default class Board extends Component {
   }
 
   componentWillMount() {
+    const words = ['rain', 'scary', 'happy', 'romance', 'love', 'vacation'];
     this.setState({
-      puzzleGrid: wordsearch(['rain', 'scary', 'happy'], 5, 5).grid
+      puzzleGrid: wordsearch(words, 5, 7, wordsearch.opts = { backwords: 0.4 }).grid
     });
   }
 
-  // checkValidSelection(position) {
-  //   if (this.selectedLetters === "" || )
-  // }
+  checkValidSelection(id, letter) {
+    const { selectedLetters } = this.state;
+    console.log("valid");
+  }
 
   handleLetterPress(id, letter) {
     const { selectedLetters } = this.state;
@@ -39,6 +42,7 @@ export default class Board extends Component {
     }
     this.setState(selectedLetters);
     console.log(selectedLetters);
+    // checkValidSelection(id, letter);
   }
 
   renderTile(id, position, letter) {
@@ -65,9 +69,9 @@ export default class Board extends Component {
 
   renderTiles() {
     const result = [];
-    for (let row = 0; row < size; row++) {
-      for (let col = 0; col < size; col++) {
-        const id = row * size + col;
+    for (let row = 0; row < gridHeight; row++) {
+      for (let col = 0; col < gridWidth; col++) {
+        const id = row * gridWidth + col;
         const letter = this.state.puzzleGrid[row][col];
         const position = {
           left: col * cellSize + cellPadding,
@@ -90,8 +94,8 @@ export default class Board extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: cellSize * size,
-    height: cellSize * size,
+    width: cellSize * gridWidth,
+    height: cellSize * gridHeight,
     backgroundColor: 'transparent'
   },
   tile: {
