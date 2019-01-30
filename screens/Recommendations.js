@@ -18,6 +18,15 @@ export default class Recommendation extends Component {
     this.getRecommendations();
   }
 
+  bookDetail = (bookObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "BookDetail",
+      params: { data: bookObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
   getRecommendations = () => {
     API.getRecommendations()
       .then(res => this.setState({ recommendations: res.data }));
@@ -36,7 +45,7 @@ export default class Recommendation extends Component {
         <DeckSwiper
           dataSource={recommendations}
           renderItem={(recommendation) => {
-            return <RecommendationCard key={recommendation._id} data={recommendation} save={API.saveBook} />;
+            return <RecommendationCard key={recommendation._id} data={recommendation} save={API.saveBook} detail={this.bookDetail} />;
           }}
         />
       </View>

@@ -8,7 +8,6 @@ import { getBooks } from '../screens/MyFavorites';
 export default RecommendationCard = (props) => {
   const { title, image, authors, _id } = props.data;
 
-  console.log(_id);
   return (
     <Card style={{ elevation: 3 }}>
       <CardItem>
@@ -23,6 +22,14 @@ export default RecommendationCard = (props) => {
         <Image style={{ height: 300, flex: 1, resizeMode: 'contain' }} source={{ uri: image }} />
       </CardItem>
       <CardItem>
+        <Button
+            transparent
+            textStyle={{ color: '#87838B' }}
+            onPress={() => props.detail.bookDetail(props.data)}
+          >
+            <Icon name="navigate" />
+            <Text>Book Detail</Text>
+          </Button>
         <Icon
           onPress={() => { props.save(_id); }}
           name="heart"

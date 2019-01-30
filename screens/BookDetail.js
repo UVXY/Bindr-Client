@@ -10,6 +10,7 @@ export default class BookDetail extends Component {
   render() {
     const { title, summary, imageLinks, subtitle } = this.props.navigation.state.params.data
     // console.log(this.props.navigation.state.params.data)
+    console.log(this.props.navigation.state);
     return (
         <Container>
         <Content>

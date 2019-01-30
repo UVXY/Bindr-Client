@@ -8,25 +8,6 @@ import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
 import RecommendationScreen from '../screens/Recommendations';
 
-// FOR TESTING
-const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen
-});
-
-RecommendationStack.navigationOptions = {
-  tabBarLabel: 'Recommendations',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  )
-};
-
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   BookDetail: {
@@ -63,6 +44,23 @@ MyFavoritesStack.navigationOptions = {
   )
 };
 
+const RecommendationStack = createStackNavigator({
+  Recommendation: RecommendationScreen
+});
+
+RecommendationStack.navigationOptions = {
+  tabBarLabel: 'Recommendations',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  )
+};
 
 export default createBottomTabNavigator({
   HomeStack,
