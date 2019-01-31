@@ -7,7 +7,9 @@ import {
 } from 'native-base';
 import API from '../utils/API';
 import BookCard from '../components/BookCard';
-import Header from '../components/Header';
+import Header from "../components/Header";
+// import SideBar from '../components/SideBar';
+
 
 export default class MyFavorites extends Component {
   static navigationOptions = {
