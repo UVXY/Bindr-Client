@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import { Text } from 'native-base';
+import { Text, Header, Title, Subtitle, Container, Body } from 'native-base';
 
 const wordsearch = require('wordsearch');
 
@@ -13,23 +13,50 @@ const cellPadding = Math.floor(cellSize * 0.05); // 5% of the cell size
 const borderRadius = cellPadding * 2;
 const tileSize = cellSize - cellPadding * 2;
 const letterSize = Math.floor(tileSize * 0.75);
+const words = [
+  "travel", "wandering", "lost", "best", "earliest-list", "favourites", "writer", "sad", "crying", "death", 
+  "learning", "technology", "help", "comedy", "funny", "humor", "humour", "satire", "old", "ancient",
+  "storm", "cloudy", "celebrity", "movies", "blond", "fantasy", "sci-fi", "science-fiction", "sf",
+  "classics", "business", "career", "creativity", "fitness", "happiness", "health", "love", "non-fiction", "nonfiction",
+  "productivity", "relationships", "romance", "self-help", "success", "wellness", "baseball", "sports",
+  "book club", "historical", "literary", "summer", "sunny", "clear", "warm", "autumn", "books", "coffee", 
+  "creep", "creepy", "dark", "fall", "fireplace", "freaky", "halloween", "leaves", "november", "october", "pumpkin",
+  "rain", "rainy", "reading", "scary", "september", "spooky", "sweater", "tea", "thanksgiving", "intrigue", 
+  "mystery", "thriller", "fiction", "seasons", "setting", "weather", "winter", "cold", "warmup"
+];
 
 export default class Board extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   state = {
     selectedLetters: [],
-    puzzleGrid: []
+    puzzleGrid: [],
+    wordsChosen: []
   }
 
   componentWillMount() {
-    const words = ['rain', 'scary', 'happy', 'romance', 'love', 'vacation'];
     this.setState({
       puzzleGrid: wordsearch(words, 5, 7, wordsearch.opts = { backwords: 0.4 }).grid
     });
   }
 
-  checkValidSelection(id, letter) {
+  checkIfWord() {
     const { selectedLetters } = this.state;
-    console.log("valid");
+    const letters = selectedLetters.map(x => x[0]);
+    const sortedLetters = letters.sort().join('');
+
+    for (const word of words) {
+      if (word.length !== selectedLetters.length) {
+        continue;
+      }
+
+      if (word.split('').sort().join('') === sortedLetters) {
+        console.log(word);
+      }
+    }
+    return null;
   }
 
   handleLetterPress(id, letter) {
@@ -41,8 +68,7 @@ export default class Board extends Component {
       selectedLetters.push([letter, id]);
     }
     this.setState(selectedLetters);
-    console.log(selectedLetters);
-    // checkValidSelection(id, letter);
+    this.checkIfWord();
   }
 
   renderTile(id, position, letter) {
@@ -85,9 +111,24 @@ export default class Board extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderTiles()}
-      </View>
+      <Container style={{ flex:1 }}>
+        <Header style={{ backgroundColor: '#00CE9F' }}>
+          <Body>
+          <Title style={{ fontSize: 28 }}>
+            {' '}
+            Select two words
+          </Title>
+          <Subtitle>
+            (Hint: Words may be backwards or diagonal)
+          </Subtitle>
+          </Body>
+        </Header>
+
+        <View style={styles.container}>
+          {this.renderTiles()}
+        </View>
+      </Container>
+
     );
   }
 }
@@ -96,7 +137,10 @@ const styles = StyleSheet.create({
   container: {
     width: cellSize * gridWidth,
     height: cellSize * gridHeight,
-    backgroundColor: 'transparent'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#644B62'
   },
   tile: {
     position: 'absolute',
