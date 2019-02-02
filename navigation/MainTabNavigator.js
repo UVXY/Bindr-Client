@@ -7,7 +7,6 @@ import MyFavorites from '../screens/MyFavorites';
 import RecommendationScreen from '../screens/Recommendations';
 import Surveys from "../screens/Surveys"
 
-// FOR TESTING
 const RecommendationStack = createStackNavigator({
   Recommendation: RecommendationScreen
 });
