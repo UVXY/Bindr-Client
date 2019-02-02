@@ -14,15 +14,15 @@ const borderRadius = cellPadding * 2;
 const tileSize = cellSize - cellPadding * 2;
 const letterSize = Math.floor(tileSize * 0.75);
 const words = [
-  "travel", "wandering", "lost", "best", "earliest-list", "favourites", "writer", "sad", "crying", "death", 
+  "travel", "wandering", "lost", "best", "earliest-list", "favourites", "writer", "sad", "crying", "death",
   "learning", "technology", "help", "comedy", "funny", "humor", "humour", "satire", "old", "ancient",
-  "storm", "cloudy", "celebrity", "movies", "blond", "fantasy", "sci-fi", "science-fiction", "sf",
-  "classics", "business", "career", "creativity", "fitness", "happiness", "health", "love", "non-fiction", "nonfiction",
-  "productivity", "relationships", "romance", "self-help", "success", "wellness", "baseball", "sports",
-  "book club", "historical", "literary", "summer", "sunny", "clear", "warm", "autumn", "books", "coffee", 
-  "creep", "creepy", "dark", "fall", "fireplace", "freaky", "halloween", "leaves", "november", "october", "pumpkin",
-  "rain", "rainy", "reading", "scary", "september", "spooky", "sweater", "tea", "thanksgiving", "intrigue", 
-  "mystery", "thriller", "fiction", "seasons", "setting", "weather", "winter", "cold", "warmup"
+  "celebrity", "movies", "blond", "fantasy",
+  "classics", "business", "career", "creativity", "fitness", "happiness", "health", "love", "non-fiction",
+  "nonfiction", "productivity", "relationships", "romance", "success", "wellness", "baseball", "sports",
+  "book club", "historical", "literary", "books", "coffee", "creep", "creepy", "dark", "fall", "fireplace",
+  "freaky", "halloween", "leaves", "november", "october", "pumpkin", "reading", "scary",
+  "september", "spooky", "sweater", "tea", "thanksgiving", "intrigue", "mystery", "thriller", "fiction",
+  "seasons", "setting"
 ];
 
 export default class Board extends Component {
@@ -43,17 +43,24 @@ export default class Board extends Component {
   }
 
   checkIfWord() {
-    const { selectedLetters } = this.state;
+    const { selectedLetters, wordsChosen } = this.state;
     const letters = selectedLetters.map(x => x[0]);
     const sortedLetters = letters.sort().join('');
 
     for (const word of words) {
-      if (word.length !== selectedLetters.length) {
+      if (word.length !== selectedLetters.length || wordsChosen.includes(sortedLetters)) {
         continue;
       }
 
       if (word.split('').sort().join('') === sortedLetters) {
-        console.log(word);
+        wordsChosen.push(word);
+
+        if (wordsChosen.length < 2) {
+          alert("'" + word + "' has been added to your personalized book-matching algorithm. Select another word.");
+        } else {
+          alert("'" + word + "' has been added to your personalized book-matching algorithm. Click ok to move to the next screen.");
+        }
+        this.setState({ selectedLetters: [] });
       }
     }
     return null;
@@ -111,19 +118,17 @@ export default class Board extends Component {
 
   render() {
     return (
-      <Container style={{ flex:1 }}>
+      <Container style={{ flex: 1 }}>
         <Header style={{ backgroundColor: '#00CE9F' }}>
           <Body>
-          <Title style={{ fontSize: 28 }}>
-            {' '}
-            Select two words
-          </Title>
-          <Subtitle>
-            (Hint: Words may be backwards or diagonal)
-          </Subtitle>
+            <Title style={{ fontSize: 28 }}>
+              Select two words
+            </Title>
+            <Subtitle>
+              (Hint: Words may be backwards or diagonal)
+            </Subtitle>
           </Body>
         </Header>
-
         <View style={styles.container}>
           {this.renderTiles()}
         </View>
