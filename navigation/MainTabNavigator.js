@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
 import BookDetail from '../screens/BookDetail';
 import RecommendationScreen from '../screens/Recommendations';
+import Surveys from "../screens/Surveys"
 
 const RecommendationStack = createStackNavigator({
   Recommendation: RecommendationScreen
@@ -48,6 +49,19 @@ HomeStack.navigationOptions = {
     />
   )
 };
+const SurveysStack = createStackNavigator({
+  Survey: Surveys,
+});
+
+SurveysStack.navigationOptions = {
+  tabBarLabel: 'Survey',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
 
 const MyFavoritesStack = createStackNavigator({
   Saved: MyFavorites
@@ -67,5 +81,6 @@ MyFavoritesStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   MyFavoritesStack,
+  SurveysStack,
   RecommendationStack
 });
