@@ -30,7 +30,6 @@ export default class BookDetail extends Component {
       isbn ,
       pages,
     } = this.props.navigation.state.params.data;
-
     if (summary.length === 0) {
       summary.push("No summary available.")
     }
@@ -91,20 +90,25 @@ export default class BookDetail extends Component {
                 <Text>More Info</Text>
               </Button>
             </CardItem>
-            <CardItem bordered>
-              <Text style=
-              {{
-                fontWeight: 'bold',
-                fontSize: 12
-              }}>Comment(s):</Text>
-              {comments.map(each => {
-                <Comment 
-                  author={each.author}
-                  content={each.content}
-                  audio={each.audio}
-                  contentLink={each.contentLink}
-                />
-              })}
+            <Grid>
+              <Row>
+                <Text style=
+                {{
+                  fontWeight: 'bold',
+                  fontSize: 12
+                }}>Comment(s):</Text>
+                <Grid>
+                  {comments.map(each => (
+                    <Row key={each._id}>
+                      <Comment 
+                        author={each.author}
+                        content={each.content}
+                        audio={each.audio}
+                        contentLink={each.contentLink}
+                      />
+                    </Row>
+                  ))}
+                </Grid>
                 {/* <Button 
                     transparent 
                     textStyle={{color: '#87838B'}}
@@ -116,27 +120,47 @@ export default class BookDetail extends Component {
                   <Icon name="navigate" />
                   <Text>More Info</Text>
                 </Button> */}
-              <CardItem>
-                <Text>New Comment</Text>
+              </Row>
+              <View
+                style={{
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1,
+                }}
+              />
+              <Row>
                 <Form>
+                  <Text>New Comment</Text>
                   <Item>
-                    <Textarea onChangeText={(value) => this.setState({content: value})} name="content" rowSpan={5} bordered placeholder="Comment..." />
+                    <Textarea 
+                      onChangeText={(value) => this.setState({content: value})} 
+                      name="content" 
+                      rowSpan={5} 
+                      width="100%"
+                      bordered 
+                      placeholder="Comment..." 
+                    />
                   </Item>
                   <Item>
-                    <Radio onPress={(value) => this.setState({audio: value})} name="audio" selected={false}/>
+                    <Radio 
+                      onPress={(value) => (this.setState({audio: value}))} 
+                      name="audio" 
+                      selected={false}
+                      color={"#f0ad4e"}
+                      selectedColor={"#5cb85c"}
+                    />
                   </Item>
                   <View>
-                    <Button onPress={()=> {submitComment({
+                    <Button onPress={()=> (submitComment({
                       content: this.state.content,
                       audio: this.state.audio,
                       id: _id
-                    })}} title="Submit Comment">
+                    }))} title="Submit Comment">
                       <Text>Submit</Text>
                     </Button> 
                   </View>
                 </Form>
-              </CardItem>
-            </CardItem>
+              </Row>
+            </Grid>
           </Card>
         </Content>
       </Container>
