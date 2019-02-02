@@ -3,19 +3,45 @@ import { StyleSheet, Platform } from 'react-native';
 import { DeckSwiper, View, Text } from 'native-base';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
+import { NavigationActions } from 'react-navigation';
 import API from '../utils/API';
 
 export default class Recommendation extends Component {
   static navigationOptions = {
     header: Header
   };
-
   state = {
-    recommendations: []
+    recommendations: [],
+    user: null
   }
 
   componentWillMount() {
     this.getRecommendations();
+    API.getUser()
+    .then((res) => {
+      this.setState({
+        user: res.data
+      })
+      console.log(this.state.user);
+    });
+  }
+
+  comment = (newComment) => {
+    API.makeComment(newComment);
+  }
+
+  bookDetail = (bookObj, saveFn, mkCmnt) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "BookDetail",
+      params: { 
+        data: bookObj,
+        save: saveFn,
+        user: this.state.user,
+        comment: mkCmnt
+      }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
   }
 
   getRecommendations = () => {
@@ -25,7 +51,6 @@ export default class Recommendation extends Component {
 
   render() {
     const { recommendations } = this.state;
-
     // HACK: workaround for a bug when first render has empty recommendations
     if (recommendations.length === 0) {
       return <Text>Loading...</Text>;
@@ -36,7 +61,13 @@ export default class Recommendation extends Component {
         <DeckSwiper
           dataSource={recommendations}
           renderItem={(recommendation) => {
-            return <RecommendationCard key={recommendation._id} data={recommendation} save={API.saveBook} />;
+            return <RecommendationCard 
+              key={recommendation._id} 
+              data={recommendation} 
+              save={API.saveBook} 
+              detail={this.bookDetail}
+              comment={this.comment}
+            />;
           }}
         />
       </View>
