@@ -5,7 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import MyFavorites from '../screens/MyFavorites';
 import RecommendationScreen from '../screens/Recommendations';
-import Surveys from "../screens/Surveys"
+import Surveys from "../screens/Surveys";
+import BookDetail from '../screens/BookDetail';
 
 const RecommendationStack = createStackNavigator({
   Recommendation: RecommendationScreen
@@ -40,7 +41,11 @@ SurveysStack.navigationOptions = {
 };
 
 const MyFavoritesStack = createStackNavigator({
-  Saved: MyFavorites
+  Saved: MyFavorites,
+  BookDetail: {
+    screen: BookDetail,
+    path: "/detail"
+  }
 });
 
 MyFavoritesStack.navigationOptions = {
