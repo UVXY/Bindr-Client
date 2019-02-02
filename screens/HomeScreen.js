@@ -30,9 +30,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-      console.log(this.props.navigation.state.params.data.user)
       const user = this.props.navigation.state.params.data.user;
-      // this.props.navigation.setParams({ user })
       const navigateAction = NavigationActions.setParams({
           key: "id-1547683730508-2",
           params: { user: user }
@@ -44,17 +42,6 @@ export default class HomeScreen extends React.Component {
       
       this.setState({user})
   }
-
-  searchBook = (event) => {
-    event.preventDefault();
-    axios
-    .get("https://www.googleapis.com/books/v1/volumes", { params: {q: this.state.bookSearch }})
-    .then((results) => {
-      console.log(results)
-      this.setState({ books: results.data.items });
-    })
-    .catch(err => console.log(err));
-  }
   
   handleInputChange = (search) => {
     this.setState({bookSearch: search})
@@ -63,7 +50,7 @@ export default class HomeScreen extends React.Component {
   bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "BookDetail",
-      params: { data: bookObj }
+      params: { data: bookObj, user: this.state.user }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
@@ -81,7 +68,7 @@ export default class HomeScreen extends React.Component {
       image: imageLinks.thumbnail,
       infoLink
     }
-
+    console.log(this.state.user._id)
     API.saveBook(newBook, this.state.user._id)
       .then(res => console.log(res))
       .catch(err => console.log(err))

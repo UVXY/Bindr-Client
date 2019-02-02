@@ -23,6 +23,7 @@ export default class MyFavorites extends Component {
   componentWillMount() {
     API.getUser()
       .then((res) => {
+        console.log(res);
         this.setState({
           userImage: res.data.photo,
           userName: res.data.firstName
@@ -34,6 +35,15 @@ export default class MyFavorites extends Component {
   getBooks = () => {
     API.getUserBooks()
       .then(res => this.setState({ books: res.data.savedBooks }));
+  }
+
+  bookDetail = (bookObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "BookDetail",
+      params: { data: bookObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
   }
 
   render() {
@@ -53,7 +63,7 @@ export default class MyFavorites extends Component {
 
           <H1>{userName}'s Saved Books</H1>
           {books.map(book => (
-            <BookCard data={book} unsave={API.unsaveBook} handler={this.getBooks} />
+            <BookCard data={book} unsave={API.unsaveBook} handler={this.getBooks} detail={this.bookDetail}/>
           ))}
         </ScrollView>
       </View>

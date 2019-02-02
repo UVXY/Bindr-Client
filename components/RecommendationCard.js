@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import {
-  Card, CardItem, Text, Left, Body, Icon 
+  Card, CardItem, Text, Left, Body, Icon, Button 
 } from 'native-base';
 import { getBooks } from '../screens/MyFavorites';
 
@@ -25,7 +25,7 @@ export default RecommendationCard = (props) => {
         <Button
             transparent
             textStyle={{ color: '#87838B' }}
-            onPress={() => props.detail.bookDetail(props.data)}
+            onPress={() => props.detail(props.data, props.save, props.comment)}
           >
             <Icon name="navigate" />
             <Text>Book Detail</Text>
