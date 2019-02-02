@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Drawer } from 'native-base';
 import {
-  Header, Body, Left, Button, Icon, Title
+  Header, Body, Icon, Title
 } from 'native-base';
 
 

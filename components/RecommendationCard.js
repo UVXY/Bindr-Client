@@ -3,7 +3,6 @@ import { Image } from 'react-native';
 import {
   Card, CardItem, Text, Left, Body, Icon 
 } from 'native-base';
-import { getBooks } from '../screens/MyFavorites';
 
 export default RecommendationCard = (props) => {
   const { title, image, authors, _id } = props.data;

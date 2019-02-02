@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import PicturePicker from '../components/PicturePicker';
 import {NavigationActions} from 'react-navigation'
-import Roulette from '../components/Roulette';
 export default class CardShowcaseExample extends Component {
   static navigationOptions = {
     header: null,
