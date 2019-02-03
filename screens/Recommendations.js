@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { DeckSwiper, View, Text } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
-import { NavigationActions } from 'react-navigation';
 import API from '../utils/API';
 
 export default class Recommendation extends Component {
   static navigationOptions = {
-    header: Header
+    header: Header,
   };
   state = {
     recommendations: [],

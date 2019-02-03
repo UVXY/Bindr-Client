@@ -15,7 +15,7 @@ export default Pictures = (props) => {
     return (
       <Container>
           <ScrollView>
-              <Header style={{ backgroundColor: '#00CE9F' }}>
+              <Header style={{ backgroundColor: '#00CE9F', paddingTop: 20 }}>
               <Title style={{ fontSize: 28 }}>
               {' '}
                   Pick a picture.
