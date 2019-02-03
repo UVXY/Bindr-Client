@@ -7,7 +7,7 @@ import {
 } from 'native-base';
 import API from '../utils/API';
 import BookCard from '../components/BookCard';
-import Header from "../components/Header";
+import Header from '../components/Header';
 // import SideBar from '../components/SideBar';
 
 
@@ -41,7 +41,7 @@ export default class MyFavorites extends Component {
 
   bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: "BookDetail",
+      routeName: 'BookDetail',
       params: { data: bookObj }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -63,9 +63,12 @@ export default class MyFavorites extends Component {
             }
           />
 
-          <H1>{userName}'s Saved Books</H1>
+          <H1>
+{userName}
+'s Saved Books
+</H1>
           {books.map(book => (
-            <BookCard data={book} key={book._id} unsave={API.unsaveBook} handler={this.getBooks} detail={this.bookDetail}/>
+            <BookCard data={book} key={book._id} unsave={API.unsaveBook} handler={this.getBooks} detail={this.bookDetail} />
           ))}
         </ScrollView>
       </View>
