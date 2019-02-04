@@ -14,13 +14,11 @@ export default Pictures = (props) => {
   
     return (
       <Container>
-          <ScrollView>
-              <Header style={{ backgroundColor: '#00CE9F', paddingTop: 20 }}>
-              <Title style={{ fontSize: 28 }}>
-              {' '}
-                  Pick a picture.
-              </Title>
-              </Header>
+           <ScrollView>
+                <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: "left" }}>
+                {' '}
+                    Choose a picture
+                </Title>
           <Grid>
               <Row>
             <Col >

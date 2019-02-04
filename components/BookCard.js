@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native';
 import {
-  Content, Card, CardItem, Thumbnail, Text, Button, Icon, Body, Right
+  Content, Card, CardItem, Text, Button, Icon, Body, Right
 } from 'native-base';
 
 export default BookCard = (props) => {
@@ -12,9 +13,8 @@ export default BookCard = (props) => {
     <Content>
       <Card style={{ flex: 1 }}>
         <CardItem>
-          <Thumbnail
-            square
-            style={{ height: 65, resizeMode: 'contain' }}
+          <Image
+            style={{ height: 110, flex: 1, resizeMode: 'contain' }}
             source={{ uri: image || require('../assets/images/reader-310398_640.png') }}
           />
           <Body style={{ marginLeft: '3%' }}>
@@ -34,9 +34,8 @@ export default BookCard = (props) => {
                 props.handler();
               }}
               name="close"
-              style={{ color: '#ED4A6A', marginRight: 20 }}
+              style={{ color: '#ED4A6A', marginRight: 20, flex: 1 }}
             />
-            <Text>Remove</Text>
           </Right>
         </CardItem>
         <CardItem>

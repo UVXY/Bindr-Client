@@ -1,16 +1,16 @@
 
 import React, { Component } from 'react';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, View} from 'native-base';
-import {
-  Image,
-  StyleSheet,
-  ScrollView
-} from 'react-native';
+import { View } from 'native-base';
+import { StyleSheet, ScrollView } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import PicturePicker from '../components/PicturePicker';
-import {NavigationActions} from 'react-navigation'
+import Wordsearch from '../components/WordsearchBoard';
+import API from '../utils/API';
+import Header from '../components/Header';
+
 export default class CardShowcaseExample extends Component {
   static navigationOptions = {
-    header: null,
+    header: Header
   };
   // should all the words be stored in an array to later be stored?
   state = {
@@ -61,19 +61,23 @@ export default class CardShowcaseExample extends Component {
   
   render() {
     return (
-    <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <PicturePicker/>
-            {/* <PicturePicker goBookDetail = {this.favorites}/> */}
-        </ScrollView>
+      <View style={styles.picturePickerContainer}>
+        <PicturePicker />
+        {/* <PicturePicker goBookDetail = {this.favorites}/> */}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  picturePickerContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
+  },
+  wordsearchContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#644B62'
   }
 });
