@@ -19,6 +19,15 @@ export default class CardShowcaseExample extends Component {
     user: null
   }
 
+  componentWillMount() {
+    API.getUser()
+    .then((res) => {
+      this.setState({
+        user: res.data
+      })
+    });
+  }
+
   myFunction = () => {
     console.log("Button was pressed")
   }

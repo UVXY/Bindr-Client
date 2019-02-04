@@ -43,10 +43,12 @@ export default BookCard = (props) => {
           <Button
             transparent
             textStyle={{ color: '#87838B' }}
-            onPress={() => props.bookDetail(props.data)}
+            onPress={() => props.detail(props.data, props.save, props.comment)}
           >
             <Icon name="navigate" />
-            <Text style={{ paddingLeft: 0, alignContent: 'flex-start' }}>
+            <Text
+              style={{ paddingLeft: 0 }}
+            >
               Book Detail
             </Text>
           </Button>
