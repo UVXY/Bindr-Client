@@ -58,6 +58,7 @@ export default class Recommendation extends Component {
     return (
       <View style={styles.container}>
         <DeckSwiper
+          onSwipeRight={(itm) => API.saveBook(itm._id)}
           dataSource={recommendations}
           renderItem={(recommendation) => {
             return <RecommendationCard 

@@ -7,6 +7,8 @@ import MyFavorites from '../screens/MyFavorites';
 import RecommendationScreen from '../screens/Recommendations';
 import Surveys from "../screens/Surveys";
 import BookDetail from '../screens/BookDetail';
+import Wordsearch from '../components/WordsearchBoard';
+import PicturePicker from '../components/PicturePicker';
 
 const RecommendationStack = createStackNavigator({
   Recommendation: RecommendationScreen
@@ -28,6 +30,10 @@ RecommendationStack.navigationOptions = {
 
 const SurveysStack = createStackNavigator({
   Survey: Surveys,
+  PicturePicker: {
+    screen: PicturePicker,
+    path: "/picturePicker"
+  }
 });
 
 SurveysStack.navigationOptions = {
@@ -37,7 +43,7 @@ SurveysStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
-  ),
+  )
 };
 
 const MyFavoritesStack = createStackNavigator({
