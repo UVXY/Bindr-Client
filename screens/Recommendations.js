@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text } from 'native-base';
+import { DeckSwiper, View, Text, Title } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
@@ -57,6 +57,9 @@ export default class Recommendation extends Component {
 
     return (
       <View style={styles.container}>
+        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
+          Swipe right to save a book
+        </Title>
         <DeckSwiper
           onSwipeRight={(itm) => API.saveBook(itm._id)}
           dataSource={recommendations}
