@@ -119,14 +119,11 @@ export default class Board extends Component {
   render() {
     return (
       <Container style={{ flex: 1 }}>
-        <Header style={{ backgroundColor: '#00CE9F' }}>
+        <Header style={{ backgroundColor: '#00CE9F', paddingTop: 20 }}>
           <Body>
             <Title style={{ fontSize: 28 }}>
               Select two words
             </Title>
-            <Subtitle>
-              (Hint: Words may be backwards or diagonal)
-            </Subtitle>
           </Body>
         </Header>
         <View style={styles.container}>
