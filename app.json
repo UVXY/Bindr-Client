@@ -12,7 +12,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/reader-310398_640.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/robot-dev.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

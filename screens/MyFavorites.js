@@ -5,11 +5,10 @@ import {
 import {
   Thumbnail, H1
 } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import API from '../utils/API';
 import BookCard from '../components/BookCard';
-import Header from "../components/Header";
-// import SideBar from '../components/SideBar';
-
+import Header from '../components/Header';
 
 export default class MyFavorites extends Component {
   static navigationOptions = {
@@ -17,21 +16,11 @@ export default class MyFavorites extends Component {
   };
 
   state = {
-    books: [],
-    userName: 'Unknown',
-    userImage: null
+    books: []
   }
 
   componentWillMount() {
-    API.getUser()
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          userImage: res.data.photo,
-          userName: res.data.firstName
-        });
-        this.getBooks();
-      });
+    this.getBooks();
   }
 
   getBooks = () => {
@@ -39,17 +28,25 @@ export default class MyFavorites extends Component {
       .then(res => this.setState({ books: res.data.savedBooks }));
   }
 
-  bookDetail = (bookObj) => {
+  comment = (newComment) => {
+    API.makeComment(newComment);
+  }
+
+  bookDetail = (bookObj, saveFn, mkCmnt) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: "BookDetail",
-      params: { data: bookObj }
+      routeName: 'BookDetail',
+      params: {
+        data: bookObj,
+        save: saveFn,
+        comment: mkCmnt,
+      }
     });
     this.props.navigation.dispatch(navigateAction);
-    // this.props.navigation.goBack();
   }
 
   render() {
-    const { userName, userImage, books } = this.state;
+    const user = this.props.navigation.state.params.data.user;
+    const { books } = this.state;
 
     return (
       <View style={styles.container}>
@@ -57,15 +54,25 @@ export default class MyFavorites extends Component {
           <Thumbnail
             large
             source={
-              userImage
-                ? { uri: userImage }
+              user.photo
+                ? { uri: user.photo }
                 : require('../assets/images/reader-310398_640.png')
             }
           />
 
-          <H1>{userName}'s Saved Books</H1>
+          <H1>
+            {user.firstName}'s Saved Books
+          </H1>
           {books.map(book => (
-            <BookCard data={book} key={book._id} unsave={API.unsaveBook} handler={this.getBooks} detail={this.bookDetail}/>
+            <BookCard
+              user={user}
+              data={book}
+              key={book._id}
+              unsave={API.unsaveBook}
+              handler={this.getBooks}
+              detail={this.bookDetail}
+              comment={this.comment}
+            />
           ))}
         </ScrollView>
       </View>

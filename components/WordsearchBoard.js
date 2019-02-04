@@ -25,7 +25,7 @@ const words = [
   "seasons", "setting"
 ];
 
-export default class Board extends Component {
+export default class WordSearch extends Component {
   static navigationOptions = {
     header: null
   };
@@ -119,13 +119,9 @@ export default class Board extends Component {
   render() {
     return (
       <Container style={{ flex: 1 }}>
-        <Header style={{ backgroundColor: '#00CE9F', paddingTop: 20 }}>
-          <Body>
-            <Title style={{ fontSize: 28 }}>
+        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
               Select two words
-            </Title>
-          </Body>
-        </Header>
+        </Title>
         <View style={styles.container}>
           {this.renderTiles()}
         </View>

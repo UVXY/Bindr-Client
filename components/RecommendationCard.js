@@ -22,13 +22,17 @@ export default RecommendationCard = (props) => {
       </CardItem>
       <CardItem>
         <Button
-            transparent
-            textStyle={{ color: '#87838B' }}
-            onPress={() => props.detail(props.data, props.save, props.comment)}
+          transparent
+          textStyle={{ color: '#87838B' }}
+          onPress={() => props.detail(props.data, props.save, props.comment)}
+        >
+          <Icon name="navigate" />
+          <Text
+            style={{ paddingLeft: 0 }}
           >
-            <Icon name="navigate" />
-            <Text>Book Detail</Text>
-          </Button>
+            Book Detail
+          </Text>
+        </Button>
         <Icon
           onPress={() => { props.save(_id); }}
           name="heart"

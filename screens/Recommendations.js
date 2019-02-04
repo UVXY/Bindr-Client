@@ -22,7 +22,6 @@ export default class Recommendation extends Component {
       this.setState({
         user: res.data
       })
-      console.log(this.state.user);
     });
   }
 
