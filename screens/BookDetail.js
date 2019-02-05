@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Image, Linking } from 'react-native';
 import { Text, Button, Icon, Textarea, View } from 'native-base';
 import CommentContainer from "../components/CommentContainer";
-import { DocumentPicker, Permissions } from 'expo';
+import { DocumentPicker} from 'expo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class BookDetail extends Component {
@@ -31,6 +31,14 @@ export default class BookDetail extends Component {
           });
       }
   }
+
+  _unpickDocument = () => {
+    this.setState({ 
+      audioURI: "",
+      audioName: "",
+      audio: false
+    });
+}
 
   render() {
     const summary = Array.prototype.slice.call(this.props.navigation.state.params.data.summary);
@@ -123,12 +131,14 @@ export default class BookDetail extends Component {
               bordered 
               placeholder="Comment..." 
             />
-            <Button
-              title="Audio Comment"
-              onPress={this._pickDocument}
-            >
-              <Text>Select a sound file</Text>
-            </Button>
+            <View>
+              <Button title="Audio Comment" onPress={this._pickDocument}>
+                <Text>{this.state.audioURI.length < 1 ? "Select a file to upload" : this.state.audioName}</Text>
+              </Button>
+              {this.state.audioURI.length > 0 ?  
+              <Button title="cancel" onPress={this._unpickDocument}><Text>X</Text></Button> : 
+              null}
+            </View>
             <Button onPress={()=> (submitComment({
               content: this.state.content,
               audioURI: this.state.audioURI,

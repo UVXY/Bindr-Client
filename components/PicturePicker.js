@@ -1,10 +1,3 @@
-// import React from 'react';
-// import { View, Button } from 'react-native';
-// import { Container, Header, Item, Input, Icon, Text, Left } from 'native-base';
-
-// export default Pictures = (props) => {
-//     // check the testroulette folder
-// }
 import React, { Component } from 'react';
 import { Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Container, Header, Title, View, Button, Input } from 'native-base';
@@ -36,23 +29,23 @@ export default Pictures = (props) => {
             </Row>
             <Row>
             <Col>
-            <TouchableOpacity onPress={() => props.goBookDetail()}>
-            <Image source={require('../assets/images/LazyPug.jpg')} style={{height: 200, width: null, flex: 1}}/>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.goBookDetail()}>
+                    <Image source={require('../assets/images/LazyPug.jpg')} style={{height: 200, width: null, flex: 1}}/>
+                </TouchableOpacity>
             </Col>
             
             <Col>
-            <TouchableOpacity onPress={() => props.goBookDetail()}>
-            <Image source={require('../assets/images/HappyCat.jpg')} style={{height: 200, width: null, flex: 1}}/>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.goBookDetail()}>
+                    <Image source={require('../assets/images/HappyCat.jpg')} style={{height: 200, width: null, flex: 1}}/>
+                </TouchableOpacity>
             </Col>
             
             </Row>
             <Row>
             <Col>
-            <TouchableOpacity onPress={() => props.goBookDetail()}>
-            <Image source={require('../assets/images/LazyPug.jpg')} style={{height: 200, width: null, flex: 1}}/>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.goBookDetail()}>
+                    <Image source={require('../assets/images/LazyPug.jpg')} style={{height: 200, width: null, flex: 1}}/>
+                </TouchableOpacity>
 
             </Col>
             
@@ -82,13 +75,3 @@ export default Pictures = (props) => {
       </Container>
     );
   }
-//    const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       backgroundColor: 'green',
-//     },
-//     textContent: {
-//       fontSize: 20,
-//       color: 'red',
-//     },
-//   });
