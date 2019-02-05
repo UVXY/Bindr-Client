@@ -9,7 +9,11 @@ import BookDetail from '../screens/BookDetail';
 import RecommendationScreen from '../screens/Recommendations';
 
 const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen
+  Recommendation: RecommendationScreen,
+  BookDetail: {
+    screen: BookDetail,
+    path: "/detail"
+  }
 });
 
 RecommendationStack.navigationOptions = {
@@ -50,7 +54,11 @@ HomeStack.navigationOptions = {
 };
 
 const MyFavoritesStack = createStackNavigator({
-  Saved: MyFavorites
+  Saved: MyFavorites,
+  BookDetail: {
+    screen: BookDetail,
+    path: "/detail"
+  }
 });
 
 MyFavoritesStack.navigationOptions = {

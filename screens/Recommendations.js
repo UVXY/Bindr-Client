@@ -6,7 +6,7 @@ import RecommendationCard from '../components/RecommendationCard';
 import { NavigationActions } from 'react-navigation';
 import API from '../utils/API';
 
-export default class Recommendation extends Component {
+class Recommendation extends Component {
   static navigationOptions = {
     header: Header
   };
@@ -22,12 +22,19 @@ export default class Recommendation extends Component {
       this.setState({
         user: res.data
       })
-      console.log(this.state.user);
     });
   }
 
   comment = (newComment) => {
-    API.makeComment(newComment);
+    if (newComment.audio) {
+      console.log("audio")
+      console.log(newComment);
+      API.makeAudioComment(newComment);
+    } else {
+      console.log("normal")
+      console.log(newComment);
+      API.makeComment(newComment);
+    }
   }
 
   bookDetail = (bookObj, saveFn, mkCmnt) => {
@@ -120,3 +127,5 @@ const styles = StyleSheet.create({
     marginTop: 5
   }
 });
+
+export default Recommendation;
