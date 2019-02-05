@@ -20,7 +20,10 @@ export default class MyFavorites extends Component {
   }
 
   componentWillMount() {
-    this.getBooks();
+    this.props.navigation.addListener(
+      'willFocus',
+      this.getBooks
+    );
   }
 
   getBooks = () => {
