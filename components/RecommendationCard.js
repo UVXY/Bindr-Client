@@ -3,7 +3,6 @@ import { Image } from 'react-native';
 import {
   Card, CardItem, Text, Left, Body, Icon, Button 
 } from 'native-base';
-import { getBooks } from '../screens/MyFavorites';
 
 export default RecommendationCard = (props) => {
   const { title, image, authors, _id } = props.data;
@@ -23,13 +22,17 @@ export default RecommendationCard = (props) => {
       </CardItem>
       <CardItem>
         <Button
-            transparent
-            textStyle={{ color: '#87838B' }}
-            onPress={() => props.detail(props.data, props.save, props.comment)}
+          transparent
+          textStyle={{ color: '#87838B' }}
+          onPress={() => props.detail(props.data, props.save, props.comment)}
+        >
+          <Icon name="navigate" />
+          <Text
+            style={{ paddingLeft: 0 }}
           >
-            <Icon name="navigate" />
-            <Text>Book Detail</Text>
-          </Button>
+            Book Detail
+          </Text>
+        </Button>
         <Icon
           onPress={() => { props.save(_id); }}
           name="heart"
