@@ -61,7 +61,8 @@ export default class SignUp extends Component {
 
     handleLoginRedirect = (userObj) => {
         const navigateAction = NavigationActions.navigate({
-          routeName: "Home",
+          routeName: "Login",
+          //2-2-19: LR: User will go to Login screen after sign-up 
           params: {data: userObj}
         });
         this.props.navigation.dispatch(navigateAction);
