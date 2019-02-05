@@ -61,8 +61,7 @@ export default class SignUp extends Component {
 
     handleLoginRedirect = (userObj) => {
         const navigateAction = NavigationActions.navigate({
-          routeName: "Login",
-          //2-2-19: LR: User will go to Login screen after sign-up 
+          routeName: "Login",     
           params: {data: userObj}
         });
         this.props.navigation.dispatch(navigateAction);
@@ -113,9 +112,6 @@ export default class SignUp extends Component {
                <Button onPress={this.signUp} title="Sign Up" /> 
             </View>
           </Form>
-         
-          
-            
         </Content>
       </Container>
     );

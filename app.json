@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sample_native_app",
-    "slug": "sample_native_app",
+    "name": "Bindr-App",
+    "slug": "Bindr-App",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -12,7 +12,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/reader-310398_640.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/robot-dev.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

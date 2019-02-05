@@ -3,14 +3,18 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
-import BookDetail from '../screens/BookDetail';
 import RecommendationScreen from '../screens/Recommendations';
+import Surveys from '../screens/Surveys';
+import BookDetail from '../screens/BookDetail';
+import PicturePicker from '../components/PicturePicker';
 
-// FOR TESTING
 const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen
+  Recommendation: RecommendationScreen,
+  BookDetail: {
+    screen: BookDetail,
+    path: "/detail"
+  }
 });
 
 RecommendationStack.navigationOptions = {
@@ -27,30 +31,30 @@ RecommendationStack.navigationOptions = {
   )
 };
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  BookDetail: {
-    screen: BookDetail,
-    path: "/detail"
+const SurveysStack = createStackNavigator({
+  Survey: Surveys,
+  PicturePicker: {
+    screen: PicturePicker,
+    path: '/picturePicker'
   }
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+SurveysStack.navigationOptions = {
+  tabBarLabel: 'Survey',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
   )
 };
 
 const MyFavoritesStack = createStackNavigator({
-  Saved: MyFavorites
+  Saved: MyFavorites,
+  BookDetail: {
+    screen: BookDetail,
+    path: '/detail'
+  }
 });
 
 MyFavoritesStack.navigationOptions = {
@@ -65,7 +69,7 @@ MyFavoritesStack.navigationOptions = {
 
 
 export default createBottomTabNavigator({
-  HomeStack,
   MyFavoritesStack,
+  SurveysStack,
   RecommendationStack
 });
