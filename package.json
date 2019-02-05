@@ -21,7 +21,6 @@
     "react-native-drawer": "^2.5.1",
     "react-native-easy-grid": "^0.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
-    "react-native-sound": "^0.10.12",
     "react-navigation": "^2.18.2",
     "wordsearch": "0.0.0"
   },

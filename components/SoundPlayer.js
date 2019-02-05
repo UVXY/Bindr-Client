@@ -121,7 +121,7 @@ export default class SoundPlayer extends Component {
 
 
     render() {return (
-        <View>
+        <View style={{flexDirection: 'row'}}>
             <Icon 
                 name="play"
                 onPress={this._onPlayPausePressed}
