@@ -11,7 +11,11 @@ import Wordsearch from '../components/WordsearchBoard';
 import PicturePicker from '../components/PicturePicker';
 
 const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen
+  Recommendation: RecommendationScreen,
+  BookDetail: {
+    screen: BookDetail,
+    path: "/detail"
+  }
 });
 
 RecommendationStack.navigationOptions = {
