@@ -14,7 +14,7 @@ import {
 } from "react-navigation";
 import API from "../utils/API";
 import SearchBar from '../components/SearchBar';
-import BookCard from '../components/BookCard';
+import ImageCard from '../components/DataCard';
 import Header from '../components/Header';
 
 export default class HomeScreen extends React.Component {
@@ -114,7 +114,7 @@ export default class HomeScreen extends React.Component {
         
          {this.state.books.map(book => {
           return (
-             <BookCard key={book.id} data={book.volumeInfo} bookDetail={this.bookDetail} save={this.saveBook}/>
+             <ImageCard key={book.id} data={book.volumeInfo} bookDetail={this.bookDetail} save={this.saveBook}/>
           )}
          )}
         </ScrollView>

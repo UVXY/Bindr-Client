@@ -21,7 +21,8 @@ import {
     "technician", "cowpuncher", "middlebrow", "jackhammer", "triphthong", "wunderkind", "dazzlement", 
     "jabberwock", "witchcraft", "pawnbroker", "thumbprint", "motorcycle", "cryptogram", "torchlight",
     "bankruptcy"];
-    let NumberOfWords = 28
+    let NumberOfWords = 28;
+    
     // let wordArr = new BuildArray(NumberOfWords)
 export default class HomeScreen extends Component {
 
@@ -63,16 +64,16 @@ export default class HomeScreen extends Component {
     // words[27] = "torchlight"
     // words[28] = "bankruptcy"
 
-     updateText =() =>{
+     updateText = () =>{
         this.setState({words: 'My Changed Text'})
-     }
+     };
      BuildArray =(size)=> {
         this.length = size
         for (var i = 1; i <= size; i++) {
             this[i] = null
         }
         return this
-    }
+    };
 
     PickRandomWord=(frm)=>{
         // Generate a random number between 1 and NumberOfWords
@@ -80,7 +81,7 @@ export default class HomeScreen extends Component {
 
         // Display the word inside the text box
         frm.WordBox.value = words[rnd]
-    }
+    };
     render() {
     return (
         <Container>

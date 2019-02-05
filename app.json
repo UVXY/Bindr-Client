@@ -12,9 +12,10 @@
     "orientation": "portrait",
     "icon": "./assets/images/reader-310398_640.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/Bindr.png",
+      "flex": "1",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

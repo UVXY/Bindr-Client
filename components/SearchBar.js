@@ -10,7 +10,7 @@ export default SearchBar = (props) => {
             <Icon style={{padding: '2%'}}
               onPress={props.logout}
               name="ios-person" />
-          <Item>
+          <Item> 
             <Icon name="ios-search" />
             <Input 
                 placeholder="Search" 
