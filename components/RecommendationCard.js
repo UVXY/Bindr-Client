@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import {
-  Card, CardItem, Text, Left, Body, Icon 
+  Card, CardItem, Text, Left, Body, Icon, Button 
 } from 'native-base';
-import { getBooks } from '../screens/MyFavorites';
 
 export default RecommendationCard = (props) => {
   const { title, image, authors, _id } = props.data;
 
-  console.log(_id);
   return (
     <Card style={{ elevation: 3 }}>
       <CardItem>
@@ -23,12 +21,18 @@ export default RecommendationCard = (props) => {
         <Image style={{ height: 300, flex: 1, resizeMode: 'contain' }} source={{ uri: image }} />
       </CardItem>
       <CardItem>
-        <Icon
-          onPress={() => { props.save(_id); }}
-          name="heart"
-          style={{ color: '#ED4A6A' }}
-        />
-        <Text> Save </Text>
+        <Button
+          transparent
+          textStyle={{ color: '#87838B' }}
+          onPress={() => props.detail(props.data, props.save, props.comment)}
+        >
+          <Icon name="navigate" />
+          <Text
+            style={{ paddingLeft: 0 }}
+          >
+            Book Detail
+          </Text>
+        </Button>
       </CardItem>
     </Card>
   );

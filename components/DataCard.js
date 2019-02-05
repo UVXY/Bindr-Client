@@ -1,18 +1,22 @@
 import React, {Component} from "react";
-import { ScrollView, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Text } from "native-base";
 
-export default DataCard = (props) => {
-  const { image, word, _id } = props.data;
+// export default class WordSearch extends Component {
 
-  console.warn(_id);
+export default DataCard = (props) => {
+  // render (){
+  const { image, word, _id } = props;
+  // console.log(props);
   return (
-    <ScrollView>
-    <Text note>{word}</Text>
-    <Image source={{ uri: image }}/>
-    </ScrollView>
+    <View>
+      <TouchableOpacity onPress={()=> props.recommendationTab()}>
+      <Image source={{ uri: image }} resizeMode='contain' resizeMethod='scale' style={props.style} onPress={()=> props.renderRec(word)} />
+      </TouchableOpacity>
+    </View>
   );
 }
+
 
 
 // export default class GifPicture extends Component {

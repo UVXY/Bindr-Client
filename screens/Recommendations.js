@@ -1,21 +1,50 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text } from 'native-base';
+import { DeckSwiper, View, Text, Title } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
 
-export default class Recommendation extends Component {
+class Recommendation extends Component {
   static navigationOptions = {
-    header: Header
+    header: Header,
   };
-
   state = {
-    recommendations: []
+    recommendations: [],
+    user: null
   }
 
   componentWillMount() {
     this.getRecommendations();
+    API.getUser()
+    .then((res) => {
+      this.setState({
+        user: res.data
+      })
+    });
+  }
+
+  comment = (newComment) => {
+    if (newComment.audio) {
+      API.makeAudioComment(newComment);
+    } else {
+      API.makeComment(newComment);
+    }
+  }
+
+  bookDetail = (bookObj, saveFn, mkCmnt) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "BookDetail",
+      params: { 
+        data: bookObj,
+        save: saveFn,
+        user: this.state.user,
+        comment: mkCmnt
+      }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
   }
 
   getRecommendations = () => {
@@ -25,7 +54,6 @@ export default class Recommendation extends Component {
 
   render() {
     const { recommendations } = this.state;
-
     // HACK: workaround for a bug when first render has empty recommendations
     if (recommendations.length === 0) {
       return <Text>Loading...</Text>;
@@ -33,10 +61,20 @@ export default class Recommendation extends Component {
 
     return (
       <View style={styles.container}>
+        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
+          Swipe right to save a book
+        </Title>
         <DeckSwiper
+          onSwipeRight={(itm) => API.saveBook(itm._id)}
           dataSource={recommendations}
           renderItem={(recommendation) => {
-            return <RecommendationCard key={recommendation._id} data={recommendation} save={API.saveBook} />;
+            return <RecommendationCard 
+              key={recommendation._id} 
+              data={recommendation} 
+              save={API.saveBook} 
+              detail={this.bookDetail}
+              comment={this.comment}
+            />;
           }}
         />
       </View>
@@ -89,3 +127,5 @@ const styles = StyleSheet.create({
     marginTop: 5
   }
 });
+
+export default Recommendation;

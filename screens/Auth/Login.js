@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { View, Button, TextInput } from "react-native";
+import { Button } from "react-native";
 import { NavigationActions } from "react-navigation";
-import { Container, Header, Content, Body, Icon, Title, Form, Item, Input, Label } from 'native-base';
+import { Container, Body, Icon, Title, Form, Item, Input, Label } from 'native-base';
 import API from "../../utils/API";
+import Header from "../../components/Header";
 
 export default class SignInScreen extends Component {
     static navigationOptions = {
-      header: null,
+      header: Header
     };
 
     state = {
@@ -17,7 +18,7 @@ export default class SignInScreen extends Component {
 
     goToMain = (userObj) => {
       const navigateAction = NavigationActions.navigate({
-        routeName: "Survey",
+        routeName: "Saved",
         params: { data: userObj }
       });
       this.props.navigation.dispatch(navigateAction);
@@ -41,15 +42,6 @@ export default class SignInScreen extends Component {
   render(){
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title style={{ fontSize: 38 }}> Bindr 
-              <Icon style={{ fontSize: 42, color: "#ffffff" }}
-                name="book" />
-            </Title>
-          </Body>
-        </Header>
-
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
