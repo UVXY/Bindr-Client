@@ -5,8 +5,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import MyFavorites from '../screens/MyFavorites';
 import RecommendationScreen from '../screens/Recommendations';
-import Surveys from "../screens/Surveys";
+import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
+import PicturePicker from '../components/PicturePicker';
 
 const RecommendationStack = createStackNavigator({
   Recommendation: RecommendationScreen,
@@ -32,6 +33,10 @@ RecommendationStack.navigationOptions = {
 
 const SurveysStack = createStackNavigator({
   Survey: Surveys,
+  PicturePicker: {
+    screen: PicturePicker,
+    path: '/picturePicker'
+  }
 });
 
 SurveysStack.navigationOptions = {
@@ -41,14 +46,14 @@ SurveysStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
-  ),
+  )
 };
 
 const MyFavoritesStack = createStackNavigator({
   Saved: MyFavorites,
   BookDetail: {
     screen: BookDetail,
-    path: "/detail"
+    path: '/detail'
   }
 });
 
