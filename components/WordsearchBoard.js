@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated, Alert } from 'react-native';
 import { Text, Header, Title, Subtitle, Container, Body } from 'native-base';
 
 const wordsearch = require('wordsearch');
@@ -56,9 +56,17 @@ export default class WordSearch extends Component {
         wordsChosen.push(word);
 
         if (wordsChosen.length < 2) {
-          alert("'" + word + "' has been added to your personalized book-matching algorithm. Select another word.");
+          Alert.alert(
+            "You chose '" + word + "'.",
+            "Select another word."
+          );
         } else {
-          alert("'" + word + "' has been added to your personalized book-matching algorithm. Click ok to move to the next screen.");
+          Alert.alert(
+            "You chose '" + word + "'.",
+            "Press OK to move to the next screen.",
+            [{ text: 'OK', onPress: () => this.props.picturePicker() }],
+            { cancelable: false }
+          );
         }
         this.setState({ selectedLetters: [] });
       }

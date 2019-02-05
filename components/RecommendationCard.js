@@ -33,12 +33,6 @@ export default RecommendationCard = (props) => {
             Book Detail
           </Text>
         </Button>
-        <Icon
-          onPress={() => { props.save(_id); }}
-          name="heart"
-          style={{ color: '#ED4A6A' }}
-        />
-        <Text> Save </Text>
       </CardItem>
     </Card>
   );
