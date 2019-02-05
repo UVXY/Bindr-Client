@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "@expo/vector-icons": "^9.0.0",
     "axios": "^0.18.0",
     "expo": "^31.0.2",
     "native-base": "^2.10.0",
@@ -19,6 +20,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-easy-grid": "^0.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-drawer": "^2.5.1",
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {

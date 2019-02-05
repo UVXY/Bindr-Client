@@ -8,6 +8,15 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 
+  // custom native base fonts
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+  }
+  
+
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (

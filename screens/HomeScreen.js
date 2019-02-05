@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import axios from "axios";
-
 import {
   NavigationActions
 } from "react-navigation";
@@ -97,19 +96,21 @@ export default class HomeScreen extends React.Component {
           search={this.searchBook}
           logout={this.logout}
         /> */}
+      
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
+        
          {this.state.books.map(book => {
           return (
              <BookCard key={book.id} data={book.volumeInfo} bookDetail={this.bookDetail} save={this.saveBook}/>
           )}
          )}
         </ScrollView>
+        
       </View>
     );
   }
 
-  
+
 }
 
 const styles = StyleSheet.create({
