@@ -11,9 +11,8 @@ export default class SignInScreen extends Component {
     };
 
     state = {
-        // for testing only change back to ''
-        username: 'roxydog',
-        password: 'roxy'
+        username: '',
+        password: ''
     }
 
     goToMain = (userObj) => {
