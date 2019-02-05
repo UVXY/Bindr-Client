@@ -11,6 +11,6 @@ export default Comment = (props) => {
         comment = content
     }
     return (
-        <Text>{`${author} says: ${comment}`}</Text>
+        <Text>{`${author} says:\n ${comment}`}</Text>
     );
 }
