@@ -5,9 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import MyFavorites from '../screens/MyFavorites';
 import RecommendationScreen from '../screens/Recommendations';
-import Surveys from "../screens/Surveys";
+import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
-import Wordsearch from '../components/WordsearchBoard';
 import PicturePicker from '../components/PicturePicker';
 
 const RecommendationStack = createStackNavigator({
@@ -36,7 +35,7 @@ const SurveysStack = createStackNavigator({
   Survey: Surveys,
   PicturePicker: {
     screen: PicturePicker,
-    path: "/picturePicker"
+    path: '/picturePicker'
   }
 });
 
@@ -54,7 +53,7 @@ const MyFavoritesStack = createStackNavigator({
   Saved: MyFavorites,
   BookDetail: {
     screen: BookDetail,
-    path: "/detail"
+    path: '/detail'
   }
 });
 
