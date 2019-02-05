@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text, Title } from 'native-base';
-import { NavigationActions } from 'react-navigation';
+import { DeckSwiper, View, Text, Title, Button, Content } from 'native-base';
+import { NavigationActions, StackActions } from 'react-navigation';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
@@ -61,22 +61,37 @@ class Recommendation extends Component {
 
     return (
       <View style={styles.container}>
-        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
-          Swipe right to save a book
-        </Title>
-        <DeckSwiper
-          onSwipeRight={(itm) => API.saveBook(itm._id)}
-          dataSource={recommendations}
-          renderItem={(recommendation) => {
-            return <RecommendationCard 
-              key={recommendation._id} 
-              data={recommendation} 
-              save={API.saveBook} 
-              detail={this.bookDetail}
-              comment={this.comment}
-            />;
-          }}
-        />
+        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 20 }}>
+          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', paddingLeft: 10 }}>
+            Swipe left to view a new book, right to save
+          </Title>
+          <DeckSwiper
+            onSwipeRight={(itm) => API.saveBook(itm._id)}
+            dataSource={recommendations}
+            renderItem={(recommendation) => {
+              return <RecommendationCard
+                key={recommendation._id} 
+                data={recommendation} 
+                save={API.saveBook} 
+                detail={this.bookDetail}
+                comment={this.comment}
+              />;
+            }}
+          />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 20 }}>
+          <Button
+            style={{ backgroundColor: '#FFB233', margin: 15 }}
+            block
+            onPress={() => this.props.navigation.dispatch(StackActions.reset({
+              index: 0,
+              key: null,
+              actions: [NavigationActions.navigate({ routeName: 'Surveys' })]
+            }))}
+          >
+            <Text>Restart surveys for new recommendations</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -85,46 +100,13 @@ class Recommendation extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
-    flex: 1
+    flex: 1,
+    flexDirection: 'column'
   },
   contentContainer: {
-    padding: 10
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)'
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3
-      },
-      android: {
-        elevation: 20
-      }
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center'
-  },
-  navigationFilename: {
-    marginTop: 5
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 

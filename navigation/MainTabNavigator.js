@@ -8,34 +8,57 @@ import RecommendationScreen from '../screens/Recommendations';
 import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
 import PicturePicker from '../components/PicturePicker';
+import Header from '../components/Header';
+import Wordsearch from '../components/Wordsearch'
 
-const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen,
-  BookDetail: {
-    screen: BookDetail,
-    path: "/detail"
-  }
-});
+// const RecommendationStack = createStackNavigator({
+//   Recommendation: RecommendationScreen,
+//   BookDetail: {
+//     screen: BookDetail,
+//     path: "/detail"
+//   }
+// });
 
-RecommendationStack.navigationOptions = {
-  tabBarLabel: 'Recommendations',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  )
-};
+// RecommendationStack.navigationOptions = {
+//   tabBarLabel: 'Recommendations',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'md-information-circle'
+//       }
+//     />
+//   )
+// };
 
 const SurveysStack = createStackNavigator({
-  Survey: Surveys,
-  PicturePicker: {
-    screen: PicturePicker,
-    path: '/picturePicker'
+  Surveys: {
+    screen: Surveys,
+    path: '/surveys'
+  },
+  Wordsearch: {
+    screen: Wordsearch,
+    path: '/wordsearch',
+    navigationOptions: {
+      header: Header
+    }
+  },
+  // PicturePicker: {
+  //   screen: PicturePicker,
+  //   path: '/picturePicker',
+  //   navigationOptions: {
+  //     header: Header
+  //   }
+  // },
+  Recommendations: {
+    screen: RecommendationScreen,
+    path: '/recommendations',
+    BookDetail: {
+      screen: BookDetail,
+      path: '/detail'
+    }
   }
 });
 
@@ -71,5 +94,5 @@ MyFavoritesStack.navigationOptions = {
 export default createBottomTabNavigator({
   MyFavoritesStack,
   SurveysStack,
-  RecommendationStack
+  // RecommendationStack
 });

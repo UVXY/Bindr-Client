@@ -7,11 +7,11 @@ import {
 
 export default function HeaderMenu() {
   return (
-    <Header>
+    <Header style={{ backgroundColor: '#FFB233' }}>
       <Body>
-        <Title style={{ fontSize: 38, paddingTop: 20, alignSelf: "center" }}>
+        <Title style={{ fontSize: 33, paddingTop: 15, alignSelf: "center" }}>
           Bindr
-          <Icon style={{ fontSize: 42, color: '#ffffff' }} name="book" />
+          <Icon style={{ fontSize: 37, color: '#ffffff' }} name="book" />
         </Title>
       </Body>
     </Header>
