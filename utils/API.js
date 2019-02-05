@@ -51,7 +51,6 @@ export default {
     return axios.post(`${baseUrl}/api/comment/`, comment);
   },
   makeAudioComment: (comment) => {
-    console.log(comment)
     const formData = new FormData();
     const filenameParts = comment.audioName.split('.');
     const fileType = filenameParts[filenameParts.length - 1];

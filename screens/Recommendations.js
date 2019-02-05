@@ -27,12 +27,8 @@ class Recommendation extends Component {
 
   comment = (newComment) => {
     if (newComment.audio) {
-      console.log("audio")
-      console.log(newComment);
       API.makeAudioComment(newComment);
     } else {
-      console.log("normal")
-      console.log(newComment);
       API.makeComment(newComment);
     }
   }
