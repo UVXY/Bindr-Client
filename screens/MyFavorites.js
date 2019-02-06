@@ -31,17 +31,11 @@ class MyFavorites extends Component {
       .then(res => this.setState({ books: res.data.savedBooks }));
   }
 
-  comment = (newComment) => {
-    API.makeComment(newComment);
-  }
-
-  bookDetail = (bookObj, saveFn, mkCmnt) => {
+  bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
       routeName: 'BookDetail',
       params: {
-        data: bookObj,
-        save: saveFn,
-        comment: mkCmnt,
+        id: bookObj._id
       }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -74,7 +68,6 @@ class MyFavorites extends Component {
               unsave={API.unsaveBook}
               handler={this.getBooks}
               detail={this.bookDetail}
-              comment={this.comment}
             />
           ))}
         </ScrollView>
