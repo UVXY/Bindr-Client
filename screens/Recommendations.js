@@ -2,27 +2,61 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { DeckSwiper, View, Text, Title, Button, Content } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
+import { Location, Permissions } from 'expo';
+import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
+import * as config from '../DARKSKY_API_KEY.json';
+
+const apiKey = config.API_KEY;
 
 class Recommendation extends Component {
   static navigationOptions = {
     header: Header,
   };
+
   state = {
     recommendations: [],
-    user: null
+    user: null,
+    latitude: null,
+    longitude: null
   }
 
   componentWillMount() {
+    this.getUserLocation();
     this.getRecommendations();
     API.getUser()
-    .then((res) => {
+      .then((res) => {
+        this.setState({
+          user: res.data
+        });
+      });
+  }
+
+  async getUserLocation() {
+    const locationEnabled = await Permissions.askAsync(Permissions.LOCATION);
+
+    if (locationEnabled.status === 'granted') {
+      const location = await Location.getCurrentPositionAsync({});
       this.setState({
-        user: res.data
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      });
+      this.getWeather();
+    }
+  }
+
+  getWeather = () => {
+    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((res) => {
+        // TODO: add logic
+        console.log(res);
       })
-    });
+      .catch(err => console.log(err));
   }
 
   comment = (newComment) => {

@@ -82,3 +82,5 @@ typings/
 config.json
 
 .expo
+
+DARKSKY_API_KEY.json
