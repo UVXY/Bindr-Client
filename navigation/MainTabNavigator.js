@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 
 import TabBarIcon from '../components/TabBarIcon';
 import MyFavorites from '../screens/MyFavorites';
@@ -8,43 +9,44 @@ import RecommendationScreen from '../screens/Recommendations';
 import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
 import PicturePicker from '../components/PicturePicker';
-
-const RecommendationStack = createStackNavigator({
-  Recommendation: RecommendationScreen,
-  BookDetail: {
-    screen: BookDetail,
-    path: "/detail"
-  }
-});
-
-RecommendationStack.navigationOptions = {
-  tabBarLabel: 'Recommendations',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  )
-};
+import Header from '../components/Header';
+import Wordsearch from '../components/Wordsearch'
 
 const SurveysStack = createStackNavigator({
-  Survey: Surveys,
-  PicturePicker: {
-    screen: PicturePicker,
-    path: '/picturePicker'
+  Surveys: {
+    screen: Surveys,
+    path: '/surveys'
+  },
+  Wordsearch: {
+    screen: Wordsearch,
+    path: '/wordsearch',
+    navigationOptions: {
+      header: Header
+    }
+  },
+  // PicturePicker: {
+  //   screen: PicturePicker,
+  //   path: '/picturePicker',
+  //   navigationOptions: {
+  //     header: Header
+  //   }
+  // },
+  Recommendations: {
+    screen: RecommendationScreen,
+    path: '/recommendations',
+    BookDetail: {
+      screen: BookDetail,
+      path: '/detail'
+    }
   }
 });
 
 SurveysStack.navigationOptions = {
-  tabBarLabel: 'Survey',
+  tabBarLabel: 'Recommendations',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-book' : 'md-book'}
     />
   )
 };
@@ -62,7 +64,7 @@ MyFavoritesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
     />
   )
 };
@@ -70,6 +72,5 @@ MyFavoritesStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   MyFavoritesStack,
-  SurveysStack,
-  RecommendationStack
+  SurveysStack
 });

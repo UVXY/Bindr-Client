@@ -8,7 +8,7 @@ export default Pictures = (props) => {
     return (
       <Container>
            <ScrollView>
-                <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: "left" }}>
+                <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: "left" }}>
                 {' '}
                     Choose a picture
                 </Title>
