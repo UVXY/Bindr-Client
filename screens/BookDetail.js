@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Image, Linking, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Text, Button, Icon, Textarea, View } from 'native-base';
-import CommentContainer from "../components/CommentContainer";
 import { DocumentPicker} from 'expo';
+import API from '../utils/API';
+import CommentContainer from "../components/CommentContainer";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class BookDetail extends Component {
@@ -15,7 +16,21 @@ export default class BookDetail extends Component {
     audioURI: "",
     audioName: "",
     audio: false,
-    hideComments: true
+    hideComments: true,
+    book: {}
+  }
+
+  componentWillMount() {
+    this.props.navigation.addListener(
+      'willFocus',
+      this.getBook
+    );
+  }
+
+  getBook = () => {
+    const id = this.props.navigation.state.params.id
+    API.getBookByID(id)
+      .then(res => this.setState({ book: res.data[0] }));
   }
 
   _pickDocument = async () => {
@@ -24,12 +39,20 @@ export default class BookDetail extends Component {
         copyToCacheDirectory: false
       });
       if (result.type !== 'cancel') {
-          this.setState({ 
-            audioURI: result.uri,
-            audioName: result.name,
-            audio: true
-          });
+        this.setState({ 
+          audioURI: result.uri,
+          audioName: result.name,
+          audio: true
+        });
       }
+  }
+
+  comment = (newComment) => {
+    if (newComment.audio) {
+      API.makeAudioComment(newComment);
+    } else {
+      API.makeComment(newComment);
+    }
   }
 
   _unpickDocument = () => {
@@ -41,9 +64,7 @@ export default class BookDetail extends Component {
 }
 
   render() {
-    const summary = Array.prototype.slice.call(this.props.navigation.state.params.data.summary);
-    const save = this.props.navigation.state.params.save;
-    const submitComment = this.props.navigation.state.params.comment;
+    let summary = this.state.book.summary;
     const { 
       _id, 
       title, 
@@ -55,11 +76,17 @@ export default class BookDetail extends Component {
       comments, 
       isbn ,
       pages,
-    } = this.props.navigation.state.params.data;
-    if (summary.length === 0) {
-      summary.push("No summary available.")
+    } = this.state.book
+
+    if (this.state.book.title === undefined){
+      return <Text>Loading...</Text>;
     }
 
+    if (summary.length === 0) {
+      summary.push("No summary available.")
+    } else {
+      summary = Array.prototype.slice.call(this.state.book.summary);
+    }
     return (
       <ScrollView style={{margin: 5, flex:1, backgroundColor: 'white'}} ref = 'scroll'>
         <KeyboardAvoidingView behavior='position' style = {{backgroundColor: 'white', flex: 1}}>
@@ -142,7 +169,7 @@ export default class BookDetail extends Component {
               null}
             </View>
             <Button 
-              onPress={()=> (submitComment({
+              onPress={()=> (this.comment({
                 content: this.state.content,
                 audioURI: this.state.audioURI,
                 audioName: this.state.audioName,

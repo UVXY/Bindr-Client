@@ -67,22 +67,23 @@ class Recommendation extends Component {
       .catch(err => console.log(err));
   }
 
-  comment = (newComment) => {
-    if (newComment.audio) {
-      API.makeAudioComment(newComment);
-    } else {
-      API.makeComment(newComment);
-    }
+  getWeather = () => {
+    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((res) => {
+        // TODO: add logic
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   }
 
-  bookDetail = (bookObj, saveFn, mkCmnt) => {
+  bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "BookDetail",
       params: { 
-        data: bookObj,
-        save: saveFn,
-        user: this.state.user,
-        comment: mkCmnt
+        id: bookObj._id
       }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -115,8 +116,7 @@ class Recommendation extends Component {
             renderItem={(recommendation) => {
               return <RecommendationCard
                 key={recommendation._id} 
-                data={recommendation} 
-                save={API.saveBook} 
+                data={recommendation}
                 detail={this.bookDetail}
                 comment={this.comment}
               />;

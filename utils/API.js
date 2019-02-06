@@ -47,6 +47,9 @@ export default {
   getBookByTag: (tag) => {
     return axios.get(`${baseUrl}/api/tag/${tag}`);
   },
+  getBookByID: (id) => {
+    return axios.get(`${baseUrl}/api/book/${id}`);
+  },
   makeComment: (comment) => {
     return axios.post(`${baseUrl}/api/comment/`, comment);
   },
