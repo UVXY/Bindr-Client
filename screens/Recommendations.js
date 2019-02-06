@@ -1,28 +1,62 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text, Title } from 'native-base';
-import { NavigationActions } from 'react-navigation';
+import { DeckSwiper, View, Text, Title, Button, Content } from 'native-base';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { Location, Permissions } from 'expo';
+import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
+import * as config from '../DARKSKY_API_KEY.json';
+
+const apiKey = config.API_KEY;
 
 class Recommendation extends Component {
   static navigationOptions = {
     header: Header,
   };
+
   state = {
     recommendations: [],
-    user: null
+    user: null,
+    latitude: null,
+    longitude: null
   }
 
   componentWillMount() {
+    this.getUserLocation();
     this.getRecommendations();
     API.getUser()
-    .then((res) => {
+      .then((res) => {
+        this.setState({
+          user: res.data
+        });
+      });
+  }
+
+  async getUserLocation() {
+    const locationEnabled = await Permissions.askAsync(Permissions.LOCATION);
+
+    if (locationEnabled.status === 'granted') {
+      const location = await Location.getCurrentPositionAsync({});
       this.setState({
-        user: res.data
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      });
+      this.getWeather();
+    }
+  }
+
+  getWeather = () => {
+    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((res) => {
+        // TODO: add logic
+        console.log(res);
       })
-    });
+      .catch(err => console.log(err));
   }
 
   comment = (newComment) => {
@@ -61,22 +95,37 @@ class Recommendation extends Component {
 
     return (
       <View style={styles.container}>
-        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
-          Swipe right to save a book
-        </Title>
-        <DeckSwiper
-          onSwipeRight={(itm) => API.saveBook(itm._id)}
-          dataSource={recommendations}
-          renderItem={(recommendation) => {
-            return <RecommendationCard 
-              key={recommendation._id} 
-              data={recommendation} 
-              save={API.saveBook} 
-              detail={this.bookDetail}
-              comment={this.comment}
-            />;
-          }}
-        />
+        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 20 }}>
+          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', paddingLeft: 10 }}>
+            Swipe left to browse, right to save
+          </Title>
+          <DeckSwiper
+            onSwipeRight={(itm) => API.saveBook(itm._id)}
+            dataSource={recommendations}
+            renderItem={(recommendation) => {
+              return <RecommendationCard
+                key={recommendation._id} 
+                data={recommendation} 
+                save={API.saveBook} 
+                detail={this.bookDetail}
+                comment={this.comment}
+              />;
+            }}
+          />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'flex-end', marginBottom: 20 }}>
+          <Button
+            style={{ backgroundColor: '#FFB233', margin: 15 }}
+            block
+            onPress={() => this.props.navigation.dispatch(StackActions.reset({
+              index: 0,
+              key: null,
+              actions: [NavigationActions.navigate({ routeName: 'Surveys' })]
+            }))}
+          >
+            <Text>Restart</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -85,46 +134,13 @@ class Recommendation extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
-    flex: 1
+    flex: 1,
+    flexDirection: 'column'
   },
   contentContainer: {
-    padding: 10
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)'
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3
-      },
-      android: {
-        elevation: 20
-      }
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center'
-  },
-  navigationFilename: {
-    marginTop: 5
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 
