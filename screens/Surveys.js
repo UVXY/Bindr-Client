@@ -4,7 +4,7 @@ import { View } from 'native-base';
 import { StyleSheet, ScrollView } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import PicturePicker from '../components/PicturePicker';
-import Wordsearch from '../components/WordsearchBoard';
+import WordSearch from '../components/WordsearchBoard';
 import API from '../utils/API';
 import Header from '../components/Header';
 

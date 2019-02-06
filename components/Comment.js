@@ -1,16 +1,15 @@
 import React from 'react'
-import {Container, Text, Body} from 'native-base';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Text, View } from 'native-base';
+import SoundPlayer from "./SoundPlayer";
 
 export default Comment = (props) => {
     const {author, content, audio, contentLink} = props;
-    let comment;
-    if (audio) {
-        comment = "Audio Comments are not Working Yet"
-    } else {
-        comment = content
-    }
+    console.log(props);
+
     return (
-        <Text>{`${author} says:\n ${comment}`}</Text>
-    );
-}
+        <View> 
+            <Text>{`${author} posted:\n`}</Text>
+            {audio ? <SoundPlayer uri={contentLink}/> : <Text>{content}</Text> }
+        </View>
+    )
+};
