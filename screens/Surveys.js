@@ -14,9 +14,14 @@ export default class CardShowcaseExample extends Component {
   };
 
   state = {
-    tags:[]
+    tags:[],
+    user: null
   }
 
+ 
+  handleGifPress = (search) => {
+    this.setState({gifSearch: search})
+  }
   picturePicker = () => {
     const navigateAction = NavigationActions.navigate({
       routeName: 'PicturePicker'
@@ -33,6 +38,8 @@ export default class CardShowcaseExample extends Component {
 
   render() {
     return (
+          
+
       <View style={styles.container}>
         <Wordsearch 
           goToRecommendations={this.goToRecommendations}
@@ -48,5 +55,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#644B62'
-  }
+  },
 });
