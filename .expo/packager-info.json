@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://ev-xiq.anonymous.bindr-client.exp.direct",
+  "packagerNgrokUrl": "https://packager.ev-xiq.anonymous.bindr-client.exp.direct",
+  "ngrokPid": 24376
 }

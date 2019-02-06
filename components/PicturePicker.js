@@ -23,7 +23,6 @@ import {
 } from 'native-base';
 import DataCard from './DataCard'
 
-import axios from "axios";
 // ========================= check testing for dumped files ==============================
 export default class GifPicture extends Component {
     static navigationOptions = {

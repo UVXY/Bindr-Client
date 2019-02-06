@@ -67,8 +67,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#644B62'
   },
-  buttonContainer: {
-    flex: 1,
-    alignContent: 'flex-start',
-  },
 });
