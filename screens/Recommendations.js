@@ -25,22 +25,11 @@ class Recommendation extends Component {
     });
   }
 
-  comment = (newComment) => {
-    if (newComment.audio) {
-      API.makeAudioComment(newComment);
-    } else {
-      API.makeComment(newComment);
-    }
-  }
-
-  bookDetail = (bookObj, saveFn, mkCmnt) => {
+  bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "BookDetail",
       params: { 
-        data: bookObj,
-        save: saveFn,
-        user: this.state.user,
-        comment: mkCmnt
+        id: bookObj._id
       }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -71,7 +60,6 @@ class Recommendation extends Component {
             return <RecommendationCard 
               key={recommendation._id} 
               data={recommendation} 
-              save={API.saveBook} 
               detail={this.bookDetail}
               comment={this.comment}
             />;
