@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Animated, Alert } from 'react-native';
 import { Text, Header, Title, Subtitle, Container, Body } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 
 const wordsearch = require('wordsearch');
 
@@ -14,18 +15,13 @@ const borderRadius = cellPadding * 2;
 const tileSize = cellSize - cellPadding * 2;
 const letterSize = Math.floor(tileSize * 0.75);
 const words = [
-  "travel", "wandering", "lost", "best", "earliest-list", "favourites", "writer", "sad", "crying", "death",
-  "learning", "technology", "help", "comedy", "funny", "humor", "humour", "satire", "old", "ancient",
-  "celebrity", "movies", "blond", "fantasy",
-  "classics", "business", "career", "creativity", "fitness", "happiness", "health", "love", "non-fiction",
-  "nonfiction", "productivity", "relationships", "romance", "success", "wellness", "baseball", "sports",
-  "book club", "historical", "literary", "books", "coffee", "creep", "creepy", "dark", "fall", "fireplace",
-  "freaky", "halloween", "leaves", "november", "october", "pumpkin", "reading", "scary",
-  "september", "spooky", "sweater", "tea", "thanksgiving", "intrigue", "mystery", "thriller", "fiction",
-  "seasons", "setting"
+  "travel", "lost", "best", "writer", "sad", "crying", "death", "help", "comedy", "funny", "humor", "humour", "satire",
+  "old", "ancient", "movies", "blond", "fantasy", "business", "career", "creativity", "fitness", "happiness", "health",
+  "love", "romance", "success", "sports", "books", "coffee", "creep", "creepy", "dark", "fall", "freaky", "leaves",
+  "pumpkin", "reading", "scary", "spooky", "sweater", "tea", "mystery", "fiction", "seasons", "setting"
 ];
 
-export default class WordSearch extends Component {
+export default class Wordsearch extends Component {
   static navigationOptions = {
     header: null
   };
@@ -64,7 +60,7 @@ export default class WordSearch extends Component {
           Alert.alert(
             "You chose '" + word + "'.",
             "Press OK to move to the next screen.",
-            [{ text: 'OK', onPress: () => this.props.picturePicker() }],
+            [{ text: 'OK', onPress: () => this.props.recommendations() }],
             { cancelable: false }
           );
         }
@@ -127,9 +123,11 @@ export default class WordSearch extends Component {
   render() {
     return (
       <Container style={{ flex: 1 }}>
-        <Title style={{ fontSize: 28, backgroundColor: '#00CE9F', textAlign: 'left' }}>
-              Select two words
-        </Title>
+        <View style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', alignItems: 'stretch' }}>
+          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', alignItems: 'stretch' }}>
+                Select two words
+          </Title>
+        </View>
         <View style={styles.container}>
           {this.renderTiles()}
         </View>
