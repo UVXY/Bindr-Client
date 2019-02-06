@@ -24,18 +24,18 @@ export default class CardShowcaseExample extends Component {
     this.props.navigation.dispatch(navigateAction);
   }
 
-  recommendations = () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'Recommendations'
-    });
-    this.props.navigation.dispatch(navigateAction);
+  goToRecommendations = (bookTags) => {
+    this.props.navigation.navigate(
+      'Recommendations',
+      { bookTags }
+    );
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Wordsearch
-          recommendations={this.recommendations}
+        <Wordsearch 
+          goToRecommendations={this.goToRecommendations}
         />
       </View>
     );

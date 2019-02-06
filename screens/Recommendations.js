@@ -20,12 +20,19 @@ class Recommendation extends Component {
     recommendations: [],
     user: null,
     latitude: null,
-    longitude: null
+    longitude: null,
+    bookTags: this.props.navigation.getParam('bookTags', 'best')
   }
 
   componentWillMount() {
+    this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        console.log("will focus");
+        this.getRecommendations();
+      }
+    );
     this.getUserLocation();
-    this.getRecommendations();
     API.getUser()
       .then((res) => {
         this.setState({
@@ -55,6 +62,7 @@ class Recommendation extends Component {
       .then((res) => {
         // TODO: add logic
         console.log(res);
+        this.state.bookTags.push('new value')
       })
       .catch(err => console.log(err));
   }
@@ -82,8 +90,10 @@ class Recommendation extends Component {
   }
 
   getRecommendations = () => {
-    API.getRecommendations()
-      .then(res => this.setState({ recommendations: res.data }));
+    this.state.bookTags.map(tag => (
+      API.getBookByTag(tag)
+        .then(res => this.setState({ recommendations: res.data }))
+    ));
   }
 
   render() {
