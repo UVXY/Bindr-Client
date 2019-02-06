@@ -9,7 +9,7 @@ export default RecommendationCard = (props) => {
 
   return (
     <View>
-      <Card style={{ elevation: 3, marginLeft: 10, marginRight: 10 }}>
+      <Card style={{ elevation: 3, marginLeft: 25, marginRight: 25 }}>
         <CardItem>
           <Left>
             <Body>
@@ -19,7 +19,9 @@ export default RecommendationCard = (props) => {
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Image style={{ height: 300, flex: 1, resizeMode: 'contain' }} source={{ uri: image }} />
+          <Text style={{ fontSize: 30, marginLeft: 20 }}>&lt;</Text>
+          <Image style={{ height: 200, flex: 1, resizeMode: 'contain' }} source={{ uri: image }} />
+          <Text style={{ fontSize: 30, textAlign: 'right', marginRight: 20  }}>&gt;</Text>
         </CardItem>
         <CardItem>
           <Button

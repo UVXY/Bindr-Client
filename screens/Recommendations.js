@@ -97,7 +97,7 @@ class Recommendation extends Component {
       <View style={styles.container}>
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 20 }}>
           <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', paddingLeft: 10 }}>
-            Swipe left to view a new book, right to save
+            Swipe left to browse, right to save
           </Title>
           <DeckSwiper
             onSwipeRight={(itm) => API.saveBook(itm._id)}
@@ -123,7 +123,7 @@ class Recommendation extends Component {
               actions: [NavigationActions.navigate({ routeName: 'Surveys' })]
             }))}
           >
-            <Text>Restart surveys for new recommendations</Text>
+            <Text>Restart</Text>
           </Button>
         </View>
       </View>
