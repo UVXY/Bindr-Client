@@ -25,11 +25,19 @@ export default class CardShowcaseExample extends Component {
     this.props.navigation.dispatch(navigateAction);
   }
 
+<<<<<<< HEAD
   recommendations = () => {
     const navigateAction = NavigationActions.navigate({
       routeName: 'Saved'
     });
     this.props.navigation.dispatch(navigateAction);
+=======
+  goToRecommendations = (bookTags) => {
+    this.props.navigation.navigate(
+      'Recommendations',
+      { bookTags }
+    );
+>>>>>>> f5b805fced87b6191d13df4885854948d8eaa18d
   }
 
   render() {
@@ -37,10 +45,16 @@ export default class CardShowcaseExample extends Component {
           
 
       <View style={styles.container}>
+<<<<<<< HEAD
         <PicturePicker/>
         {/* <Wordsearch
           recommendations={this.recommendations}
         /> */}
+=======
+        <Wordsearch 
+          goToRecommendations={this.goToRecommendations}
+        />
+>>>>>>> f5b805fced87b6191d13df4885854948d8eaa18d
       </View>
     );
   }

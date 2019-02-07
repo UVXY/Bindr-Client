@@ -1,5 +1,5 @@
-import axios from "axios";
-import * as config from "../config.json";
+import axios from 'axios';
+import * as config from '../app.json';
 
 const baseUrl = config.API_URL;
 
@@ -46,6 +46,9 @@ export default {
   },
   getBookByTag: (tag) => {
     return axios.get(`${baseUrl}/api/tag/${tag}`);
+  },
+  getBookByID: (id) => {
+    return axios.get(`${baseUrl}/api/book/${id}`);
   },
   makeComment: (comment) => {
     return axios.post(`${baseUrl}/api/comment/`, comment);
