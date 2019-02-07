@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import axios from "axios";
 import * as config from "../app.json";
+=======
+import axios from 'axios';
+import * as config from '../app.json';
+>>>>>>> f5b805fced87b6191d13df4885854948d8eaa18d
 
 const baseUrl = config.default.expo.extra.apiBaseURL;
 

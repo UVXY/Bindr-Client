@@ -13,7 +13,7 @@ const apiKey = config.default.expo.extra.darkSky;
 
 class Recommendation extends Component {
   static navigationOptions = {
-    header: Header,
+    header: Header
   };
 
   state = {
