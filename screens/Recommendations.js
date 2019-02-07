@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { DeckSwiper, View, Text, Title, Button } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { Location, Permissions } from 'expo';
+import { Location, Permissions, Constants } from 'expo';
 import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
-import { Constants } from "expo";
+import Spinner from '../components/Spinner';
 
 const apiKey = Constants.manifest.extra.darkSky;
 
@@ -28,10 +28,9 @@ class Recommendation extends Component {
     this.props.navigation.addListener(
       'willFocus',
       () => {
-        this.getRecommendations();
+        this.getUserLocation();
       }
     );
-    this.getUserLocation();
     API.getUser()
       .then((res) => {
         this.setState({
@@ -44,26 +43,27 @@ class Recommendation extends Component {
     const locationEnabled = await Permissions.askAsync(Permissions.LOCATION);
 
     if (locationEnabled.status === 'granted') {
-      const location = await Location.getCurrentPositionAsync({});
-      this.setState({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      });
-      this.getWeather();
-    }
+      if (Platform.OS === 'android' && !Constants.isDevice) {
+        this.getRecommendations();
+      } else {
+        const location = await Location.getCurrentPositionAsync({});
+        this.setState({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        });
+        this.getWeather();
+      }
+    } else { this.getRecommendations(); }
   }
 
   getWeather = () => {
     const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
-    console.log(url);
     axios
-      .get(url)
+      .get(url, { timeout: 5000 })
       .then((res) => {
-
         //Our tags:  "storm", "cloudy", "sunny", "clear", "warm", "rain", "rainy", "cold"
         //API contains tags: clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
         let weather = res.data.currently.icon;
-        //console.log(res.data.currently);
 
         if  //Storm
         ( (weather == "thunderstorm") || 
@@ -108,14 +108,23 @@ class Recommendation extends Component {
         else if 
         (
           weather == "rain"
-        ) 
+        )
           {weather = "rain";} //rainy
-        else weather = "clear";
-       
+        else {weather = "clear";}
+
         this.state.bookTags.push(weather);
-        //console.log(weather);
+        this.setState({
+          bookTags: this.state.bookTags
+        });
+
+        this.getRecommendations();
       })
-      .catch(err => console.log(err));
+      .catch(
+        err => {
+          console.log(err);
+          this.getRecommendations();
+        }
+      );
   }
 
   bookDetail = (bookObj) => {
@@ -140,13 +149,15 @@ class Recommendation extends Component {
     const { recommendations } = this.state;
     // HACK: workaround for a bug when first render has empty recommendations
     if (recommendations.length === 0) {
-      return <Text>Loading...</Text>;
+      return (
+        <Spinner />
+      );
     }
 
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 20 }}>
-          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', paddingLeft: 10 }}>
+        <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+          <Title style={{ backgroundColor: '#00CE9F' }}>
             Swipe left to browse, right to save
           </Title>
           <DeckSwiper

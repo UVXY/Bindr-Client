@@ -26,11 +26,13 @@ export default RecommendationCard = (props) => {
         <CardItem>
           <Button
             transparent
-            textStyle={{ color: '#87838B' }}
             onPress={() => props.detail(props.data, props.save, props.comment)}
           >
-            <Icon name="navigate" />
-            <Text style={{ paddingLeft: 0 }}>
+            <Icon
+              name="navigate"
+              style={{ color: '#AF33FF' }}
+            />
+            <Text style={{ paddingLeft: 0, color: '#AF33FF' }}>
               Book Detail
             </Text>
           </Button>
