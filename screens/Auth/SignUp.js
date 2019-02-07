@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Image, View } from "react-native"; 
-import { Container, Header, Content, Body, Icon, Title, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
+import { Image, View } from "react-native"; 
+import { Container, Content, Body, Icon, Title, Form, Item, Input, Label, Text, Thumbnail, Button } from 'native-base';
 import { NavigationActions } from "react-navigation";
 import { ImagePicker, Permissions } from 'expo';
 import API from "../../utils/API";
+import Header from "../../components/Header"
 
 export default class SignUp extends Component {
     static navigationOptions = {
-      header: null,
+      header: Header,
     };
 
     state = {
@@ -71,15 +72,6 @@ export default class SignUp extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title style={{ fontSize: 38 }}> Bindr 
-              <Icon style={{ fontSize: 42, color: "#ffffff" }}
-                name="book" />
-            </Title>
-          </Body>
-        </Header>
-
         <Content>
           <Form>
             <Item floatingLabel>
@@ -103,13 +95,29 @@ export default class SignUp extends Component {
             
               <Text note style={{marginRight: '20%'}}>{this.state.photo ? "uploaded profile picture" : null}</Text>
             </Item>
-            <Button onPress={this._pickImage} title="Upload from Photo Library" />
+            <Button 
+              onPress={this._pickImage}
+              block
+              style={{ margin: 5, backgroundColor: '#00CE9F' }}
+            >
+              <Text>
+                Upload user picture
+              </Text>
+            </Button>
             <View style={{justifyContent: 'center'}}>
               {/* {this.state.image === null ? null :
                 <Image large source={{ uri: this.state.image }} resizeMethod='scale' resizeMode='contain' style={{width: '100%', height: 200}}/>}   */}
             </View>
             <View>
-               <Button onPress={this.signUp} title="Sign Up" /> 
+              <Button
+                onPress={this.signUp}
+                block
+                style={{ marginLeft: 5, marginRight: 5, backgroundColor: '#00CE9F' }}
+              >
+                <Text>
+                  Sign Up
+                </Text>
+              </Button>
             </View>
           </Form>
         </Content>
