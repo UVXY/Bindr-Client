@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://6c-hbu.anonymous.bindr-client.exp.direct",
-  "packagerNgrokUrl": "https://packager.6c-hbu.anonymous.bindr-client.exp.direct",
-  "ngrokPid": 28257
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

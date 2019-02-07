@@ -7,9 +7,9 @@ import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
-import * as config from '../app.json';
+import { Constants } from "expo";
 
-const apiKey = config.API_KEY;
+const apiKey = Constants.manifest.extra.darkSky;
 
 class Recommendation extends Component {
   static navigationOptions = {
