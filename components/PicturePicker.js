@@ -26,7 +26,7 @@ import DataCard from './DataCard'
 // ========================= check testing.js for dumped files ==============================
 export default class GifPicture extends Component {
     static navigationOptions = {
-        header: null
+        style: null
     };
     state = {
         // datas: []
@@ -43,7 +43,7 @@ export default class GifPicture extends Component {
     }
     recommendationTab = () => {
         const navigateAction = NavigationActions.navigate({
-          routeName: 'Recommendations'
+          routeName: 'RecommendationScreen'
         });
         this.props.navigation.dispatch(navigateAction);
       }
@@ -63,7 +63,7 @@ export default class GifPicture extends Component {
               key={data.id}
               word={data.word} 
               image={data.image}
-              renderRec={this.goToRecommendation}
+              renderRec={this.sendToRecommendation}
               style = {{height: 200, flex: 1}}
               recommendationTab={this.recommendationTab}
             />

@@ -11,8 +11,8 @@ export default DataCard = (props) => {
   // console.log(props);
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-      <Image source={{ uri: image }} style={props.style} onPress={()=> props.recommendationTab()}/>
+      <TouchableOpacity onPress={()=> props.recommendationTab()}>
+      <Image source={{ uri: image }} style={props.style} />
       {/* onPress={()=> props.renderRec(word)}  */}
       </TouchableOpacity>
     </View>
@@ -22,10 +22,7 @@ export default DataCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
-  },
-  buttonContainer: {
-    flex: 1,
+    backgroundColor: 'red',
     alignContent: 'flex-start',
   },
 });

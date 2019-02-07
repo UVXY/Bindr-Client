@@ -24,13 +24,13 @@ const SurveysStack = createStackNavigator({
       header: Header
     }
   },
-  // PicturePicker: {
-  //   screen: PicturePicker,
-  //   path: '/picturePicker',
-  //   navigationOptions: {
-  //     header: Header
-  //   }
-  // },
+  PicturePicker: {
+    screen: PicturePicker,
+    path: '/picturePicker',
+    navigationOptions: {
+      header: Header
+    }
+  },
   Recommendations: {
     screen: RecommendationScreen,
     path: '/recommendations',

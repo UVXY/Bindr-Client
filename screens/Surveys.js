@@ -18,11 +18,7 @@ export default class CardShowcaseExample extends Component {
     user: null
   }
 
- 
-  handleGifPress = (search) => {
-    this.setState({gifSearch: search})
-  }
-  picturePicker = () => {
+    picturePicker = () => {
     const navigateAction = NavigationActions.navigate({
       routeName: 'PicturePicker'
     });
@@ -31,7 +27,7 @@ export default class CardShowcaseExample extends Component {
 
   recommendations = () => {
     const navigateAction = NavigationActions.navigate({
-      routeName: 'Recommendations'
+      routeName: 'Saved'
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -41,9 +37,10 @@ export default class CardShowcaseExample extends Component {
           
 
       <View style={styles.container}>
-        <Wordsearch
+        <PicturePicker/>
+        {/* <Wordsearch
           recommendations={this.recommendations}
-        />
+        /> */}
       </View>
     );
   }
