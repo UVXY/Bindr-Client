@@ -94,7 +94,6 @@ class Recommendation extends Component {
       API.getBookByTag(tag)
         .then(res => this.setState({ recommendations: res.data }))
     ));
-    console.log(this.state.bookTags);
   }
 
   render() {

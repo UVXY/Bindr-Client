@@ -15,9 +15,8 @@ const tileSize = cellSize - cellPadding * 2;
 const letterSize = Math.floor(tileSize * 0.75);
 const words = [
   "travel", "lost", "best", "writer", "sad", "crying", "death", "help", "comedy", "funny", "humor", "humour", "satire",
-  "old", "ancient", "movies", "blond", "fantasy", "business", "career", "creativity", "fitness", "happiness", "health",
-  "love", "romance", "success", "sports", "books", "coffee", "creep", "creepy", "dark", "fall", "freaky", "leaves",
-  "pumpkin", "reading", "scary", "spooky", "sweater", "tea", "mystery", "fiction", "seasons", "setting"
+  "old", "movies", "blond", "fantasy", "career", "health", "love", "sports", "books", "coffee", "creep", "creepy", "dark",
+  "fall", "freaky", "leaves", "scary", "spooky", "sweater", "tea", "fiction", "seasons", "setting"
 ];
 
 export default class Wordsearch extends Component {
