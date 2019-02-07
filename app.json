@@ -24,6 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "extra": {
+      "darkSky": "952f579385c4b8b051afcf58ab405b93",
+      "apiBaseURL": "https://bindr.herokuapp.com"
     }
   }
 }

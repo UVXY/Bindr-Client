@@ -7,13 +7,13 @@ import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
-import * as config from '../DARKSKY_API_KEY.json';
+import * as config from '../app.json';
 
 const apiKey = config.API_KEY;
 
 class Recommendation extends Component {
   static navigationOptions = {
-    header: Header,
+    header: Header
   };
 
   state = {

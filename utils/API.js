@@ -1,5 +1,5 @@
-import axios from "axios";
-import * as config from "../config.json";
+import axios from 'axios';
+import * as config from '../app.json';
 
 const baseUrl = config.API_URL;
 
