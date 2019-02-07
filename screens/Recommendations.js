@@ -59,21 +59,61 @@ class Recommendation extends Component {
     axios
       .get(url)
       .then((res) => {
-        // TODO: add logic
-        console.log(res);
-        this.state.bookTags.push('new value')
-      })
-      .catch(err => console.log(err));
-  }
 
-  getWeather = () => {
-    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
-    console.log(url);
-    axios
-      .get(url)
-      .then((res) => {
-        // TODO: add logic
-        console.log(res);
+        //Our tags:  "storm", "cloudy", "sunny", "clear", "warm", "rain", "rainy", "cold"
+        //API contains tags: clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+        let weather = res.data.currently.icon;
+        //console.log(res.data.currently);
+
+        if  //Storm
+        ( (weather == "thunderstorm") || 
+          (res.data.alerts.severity == "warning") || 
+          ((res.data.currently.nearestStormDistance == 0) &&
+             (res.data.currently.summary != "Drizzle"))
+        )
+          {weather = "storm"}
+        else if // Full Moon
+        (
+            res.data.daily.data[0].moonPhase == 0.5
+        )
+          {weather = "creepy"}
+        else if //Cold
+        (
+          res.data.currently.apparentTemperature < 45 ||
+          weather == "snow" ||
+          weather == "sleet"
+        )
+          {weather = "cold"}
+        else if //Cloudy
+        (
+          weather == "partly-cloudy-day"|| 
+          weather == "partly-cloudy-night"||
+          weather == "cloudy"
+        )
+          {weather = "cloudy"}
+        else if  //sunny
+        (
+          weather == "clear-day" &&
+          res.data.currently.time > res.data.daily.data[0].sunriseTime &&
+          res.data.currently.time < res.data.daily.data[0].sunsetTime &&
+          res.data.currently.uvIndex > 3
+        )
+          {weather = "sunny"}
+        else if  //Warm
+        (
+          res.data.currently.apparentTemperature > 80 && //feels like in Fahrenheit
+          weather == "clear-day"
+        )
+          {weather = "warm";}
+        else if 
+        (
+          weather == "rain"
+        ) 
+          {weather = "rain";} //rainy
+        else weather = "clear";
+       
+        this.state.bookTags.push(weather);
+        //console.log(weather);
       })
       .catch(err => console.log(err));
   }
