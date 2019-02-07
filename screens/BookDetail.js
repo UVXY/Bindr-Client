@@ -114,16 +114,22 @@ export default class BookDetail extends Component {
             <Text style={{marginTop: '4%'}}>
               Synopsis: {summary.join("\n")}
             </Text>
-            <Button 
-              transparent 
-              textStyle={{color: '#87838B'}}
+            <Button
+              transparent
               onPress={() => {
                 Linking.openURL(infoLink).then(() => {
                   console.log('Opening link')
                 }).catch(err => console.error('An error occurred', err));
             }}>
-              <Icon name="navigate" />
-              <Text>More Info</Text>
+              <Icon
+                name="navigate"
+                style={{ color: '#AF33FF' }}
+              />
+              <Text
+                style={{ paddingLeft: 0, color: '#AF33FF' }}
+              >
+                More Info
+              </Text>
             </Button>
           </View>
           <View>
@@ -161,14 +167,18 @@ export default class BookDetail extends Component {
               flexDirection: 'row',
               margin: 5
             }}>
-              <Button title="Audio Comment" onPress={this._pickDocument}>
+              <Button
+                title="Audio Comment"
+                onPress={this._pickDocument}
+                style={{ backgroundColor: '#00CE9F' }}
+              >
                 <Text>{this.state.audioURI.length < 1 ? "Select a file to upload" : this.state.audioName}</Text>
               </Button>
               {this.state.audioURI.length > 0 ?  
               <Button title="cancel" onPress={this._unpickDocument}><Text>X</Text></Button> : 
               null}
             </View>
-            <Button 
+            <Button
               onPress={()=> (this.comment({
                 content: this.state.content,
                 audioURI: this.state.audioURI,
@@ -177,7 +187,8 @@ export default class BookDetail extends Component {
                 id: _id
               }))}
               style={{
-                margin: 5
+                margin: 5,
+                backgroundColor: '#00CE9F'
               }}
               title="Submit Comment">
               <Text>Submit</Text>
