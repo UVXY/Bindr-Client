@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Animated, Alert } from 'react-native';
 import { Text, Header, Title, Subtitle, Container, Body } from 'native-base';
-import { NavigationActions } from 'react-navigation';
 
 const wordsearch = require('wordsearch');
 
 const width = 375;
 const height = 667;
 const gridWidth = 5;
-const gridHeight = 7;
+const gridHeight = 6;
 const cellSize = Math.floor(width * 0.2); // 20% of the screen width
 const cellPadding = Math.floor(cellSize * 0.05); // 5% of the cell size
 const borderRadius = cellPadding * 2;
@@ -34,7 +33,7 @@ export default class Wordsearch extends Component {
 
   componentWillMount() {
     this.setState({
-      puzzleGrid: wordsearch(words, 5, 7, wordsearch.opts = { backwords: 0.4 }).grid
+      puzzleGrid: wordsearch(words, 5, 6, wordsearch.opts = { backwords: 0.4 }).grid
     });
   }
 
@@ -60,7 +59,7 @@ export default class Wordsearch extends Component {
           Alert.alert(
             "You chose '" + word + "'.",
             "Press OK to move to the next screen.",
-            [{ text: 'OK', onPress: () => this.props.recommendations() }],
+            [{ text: 'OK', onPress: () => this.props.goToRecommendations(this.state.wordsChosen) }],
             { cancelable: false }
           );
         }

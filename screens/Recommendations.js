@@ -7,25 +7,32 @@ import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
-// import * as config from '../DARKSKY_API_KEY.json';
+import * as config from '../app.json';
 
-// const apiKey = config.API_KEY;
+const apiKey = config.API_KEY;
 
 class Recommendation extends Component {
   static navigationOptions = {
-    header: Header,
+    header: Header
   };
 
   state = {
     recommendations: [],
     user: null,
     latitude: null,
-    longitude: null
+    longitude: null,
+    bookTags: this.props.navigation.getParam('bookTags', 'best')
   }
 
   componentWillMount() {
-    // this.getUserLocation();
-    this.getRecommendations();
+    this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        console.log("will focus");
+        this.getRecommendations();
+      }
+    );
+    this.getUserLocation();
     API.getUser()
       .then((res) => {
         this.setState({
@@ -34,30 +41,43 @@ class Recommendation extends Component {
       });
   }
 
-  // async getUserLocation() {
-  //   const locationEnabled = await Permissions.askAsync(Permissions.LOCATION);
+  async getUserLocation() {
+    const locationEnabled = await Permissions.askAsync(Permissions.LOCATION);
 
-  //   if (locationEnabled.status === 'granted') {
-  //     const location = await Location.getCurrentPositionAsync({});
-  //     this.setState({
-  //       latitude: location.coords.latitude,
-  //       longitude: location.coords.longitude
-  //     });
-  //     this.getWeather();
-  //   }
-  // }
+    if (locationEnabled.status === 'granted') {
+      const location = await Location.getCurrentPositionAsync({});
+      this.setState({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      });
+      this.getWeather();
+    }
+  }
 
-  // getWeather = () => {
-  //   const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
-  //   console.log(url);
-  //   axios
-  //     .get(url)
-  //     .then((res) => {
-  //       // TODO: add logic
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  getWeather = () => {
+    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((res) => {
+        // TODO: add logic
+        console.log(res);
+        this.state.bookTags.push('new value')
+      })
+      .catch(err => console.log(err));
+  }
+
+  getWeather = () => {
+    const url = `https://api.darksky.net/forecast/${apiKey}/${this.state.latitude},${this.state.longitude}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((res) => {
+        // TODO: add logic
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  }
 
   bookDetail = (bookObj) => {
     const navigateAction = NavigationActions.navigate({
@@ -71,8 +91,10 @@ class Recommendation extends Component {
   }
 
   getRecommendations = () => {
-    API.getRecommendations()
-      .then(res => this.setState({ recommendations: res.data }));
+    this.state.bookTags.map(tag => (
+      API.getBookByTag(tag)
+        .then(res => this.setState({ recommendations: res.data }))
+    ));
   }
 
   render() {
