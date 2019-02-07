@@ -1,7 +1,7 @@
 import axios from "axios";
-import * as config from "../config.json";
+import * as config from "../app.json";
 
-const baseUrl = config.API_URL;
+const baseUrl = config.default.expo.extra.apiBaseURL;
 
 export default {
   login: (userObj) => {

@@ -59,7 +59,7 @@ export default class Wordsearch extends Component {
           Alert.alert(
             "You chose '" + word + "'.",
             "Press OK to move to the next screen.",
-            [{ text: 'OK', onPress: () => this.props.goToRecommendations(this.state.wordsChosen) }],
+            [{ text: 'OK', onPress: () => this.props.goToPicturePicker(this.state.wordsChosen) }],
             { cancelable: false }
           );
         }
