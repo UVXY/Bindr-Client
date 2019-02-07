@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text, Title, Button, Content } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { DeckSwiper, View, Text, Title, Button } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { Location, Permissions } from 'expo';
 import axios from 'axios';
@@ -28,7 +28,6 @@ class Recommendation extends Component {
     this.props.navigation.addListener(
       'willFocus',
       () => {
-        console.log("will focus");
         this.getRecommendations();
       }
     );
