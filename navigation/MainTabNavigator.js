@@ -47,7 +47,11 @@ SurveysStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-book' : 'md-book'}
     />
-  )
+  ),
+  tabBarOptions: {
+    activeTintColor: '#AF33FF',
+    inactiveTintColor: '#ccc'
+  }
 };
 
 const MyFavoritesStack = createStackNavigator({
@@ -65,9 +69,12 @@ MyFavoritesStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
     />
-  )
+  ),
+  tabBarOptions: {
+    activeTintColor: '#AF33FF',
+    inactiveTintColor: '#ccc'
+  }
 };
-
 
 export default createBottomTabNavigator({
   MyFavoritesStack,

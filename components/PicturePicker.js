@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Header, Title } from 'native-base';
 import images from '../data.json';
 import DataCard from './DataCard';
@@ -16,11 +16,11 @@ export default class GifPicture extends Component {
     render() {
       return (
         <ScrollView>
-          <Header style={{ backgroundColor: '#00CE9F' }}>
-            <Title style={{ fontSize: 28 }}>
-                Pick a picture
+          <View style={{ backgroundColor: '#00CE9F', alignItems: 'stretch' }}>
+            <Title>
+              Select a picture
             </Title>
-          </Header>
+          </View>
           {this.state.images.map(image => (
             <DataCard
               key={image.id}

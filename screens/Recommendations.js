@@ -105,8 +105,8 @@ class Recommendation extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 20 }}>
-          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', paddingLeft: 10 }}>
+        <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+          <Title style={{ backgroundColor: '#00CE9F' }}>
             Swipe left to browse, right to save
           </Title>
           <DeckSwiper
