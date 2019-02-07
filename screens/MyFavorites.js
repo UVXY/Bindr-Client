@@ -1,43 +1,125 @@
 import React, { Component } from 'react';
-import { WebView, Text, View, ScrollView } from 'react-native';
-import { Container, Content, Header } from "native-base";
-import API from "../utils/API";
+import {
+  Platform, View, ScrollView, StyleSheet
+} from 'react-native';
+import {
+  Thumbnail, H1
+} from 'native-base';
+import { NavigationActions } from 'react-navigation';
+import API from '../utils/API';
 import BookCard from '../components/BookCard';
+import Header from '../components/Header';
 
-export default class MyFavorites extends Component {
+class MyFavorites extends Component {
+  static navigationOptions = {
+    header: Header
+  };
 
-  state ={
+  state = {
     books: []
   }
-  
-  componentDidMount(){
-    
-    API.getUser()
-    .then(res => {
-      this.getBooks(res.data.user._id)
-    })
+
+  componentWillMount() {
+    this.props.navigation.addListener(
+      'willFocus',
+      this.getBooks
+    );
   }
 
-  getBooks = (id) => {
-    API.getUserBooks(id)
-    .then(res => this.setState({books: res.data.book}))
+  getBooks = () => {
+    API.getUserBooks()
+      .then(res => this.setState({ books: res.data.savedBooks }));
+  }
+
+  bookDetail = (bookObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'BookDetail',
+      params: {
+        id: bookObj._id
+      }
+    });
+    this.props.navigation.dispatch(navigateAction);
   }
 
   render() {
-    return (
-      <Container>
-        <Content>
-          <ScrollView>
+    const user = this.props.navigation.state.params.data.user;
+    const { books } = this.state;
 
-         {this.state.books.map(book => {
-          return (
-             <BookCard key={book.id} data={book}/>
-          )}
-         )}
+    return (
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <Thumbnail
+            large
+            source={
+              user.photo
+                ? { uri: user.photo }
+                : require('../assets/images/reader-310398_640.png')
+            }
+          />
+
+          <H1>
+            {user.firstName}'s Saved Books
+          </H1>
+          {books.map(book => (
+            <BookCard
+              user={user}
+              data={book}
+              key={book._id}
+              unsave={API.unsaveBook}
+              handler={this.getBooks}
+              detail={this.bookDetail}
+            />
+          ))}
         </ScrollView>
-        </Content>
-      </Container>
-      
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  contentContainer: {
+    padding: 10
+  },
+  codeHighlightText: {
+    color: 'rgba(96,100,109, 0.8)'
+  },
+  codeHighlightContainer: {
+    backgroundColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 3,
+    paddingHorizontal: 4
+  },
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3
+      },
+      android: {
+        elevation: 20
+      }
+    }),
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 20
+  },
+  tabBarInfoText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center'
+  },
+  navigationFilename: {
+    marginTop: 5
+  }
+});
+
+export default MyFavorites;

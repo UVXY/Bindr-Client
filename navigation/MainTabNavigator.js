@@ -3,48 +3,80 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import MyFavorites from '../screens/MyFavorites';
+import RecommendationScreen from '../screens/Recommendations';
+import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
+import PicturePicker from '../components/PicturePicker';
+import Header from '../components/Header';
+import Wordsearch from '../components/Wordsearch';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  BookDetail: {
-    screen: BookDetail,
-    path: "/detail"
+const SurveysStack = createStackNavigator({
+  Surveys: {
+    screen: Surveys,
+    path: '/surveys'
+  },
+  Wordsearch: {
+    screen: Wordsearch,
+    path: '/wordsearch',
+    navigationOptions: {
+      header: Header
+    }
+  },
+  PicturePicker: {
+    screen: PicturePicker,
+    path: '/picturePicker',
+    navigationOptions: {
+      header: Header
+    }
+  },
+  Recommendations: {
+    screen: RecommendationScreen,
+    path: '/recommendations',
+    BookDetail: {
+      screen: BookDetail,
+      path: '/detail'
+    }
   }
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+SurveysStack.navigationOptions = {
+  tabBarLabel: 'Recommendations',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-book' : 'md-book'}
     />
   ),
+  tabBarOptions: {
+    activeTintColor: '#AF33FF',
+    inactiveTintColor: '#ccc'
+  }
 };
 
 const MyFavoritesStack = createStackNavigator({
-  MyFavorites: MyFavorites,
+  Saved: MyFavorites,
+  BookDetail: {
+    screen: BookDetail,
+    path: '/detail'
+  }
 });
 
 MyFavoritesStack.navigationOptions = {
-  tabBarLabel: 'MyFavorites',
+  tabBarLabel: 'Saved',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
     />
   ),
+  tabBarOptions: {
+    activeTintColor: '#AF33FF',
+    inactiveTintColor: '#ccc'
+  }
 };
 
-
 export default createBottomTabNavigator({
-  HomeStack,
-  MyFavoritesStack
+  MyFavoritesStack,
+  SurveysStack
 });

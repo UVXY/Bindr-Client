@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
-import { Button, Image, View } from "react-native"; 
-import { Container, Header, Content, Form, Item, Input, Label, Text, Thumbnail } from 'native-base';
+import { Image, View } from "react-native"; 
+import { Container, Content, Body, Icon, Title, Form, Item, Input, Label, Text, Thumbnail, Button } from 'native-base';
 import { NavigationActions } from "react-navigation";
 import { ImagePicker, Permissions } from 'expo';
 import API from "../../utils/API";
+import Header from "../../components/Header"
 
 export default class SignUp extends Component {
+    static navigationOptions = {
+      header: Header,
+    };
 
     state = {
         username: '',
         password: '',
         firstName: '',
         lastName: '',
-        photo: ''
+        photoUri: ''
     }
 
     signUp = () => {
-        // deconstruct state object
-        const { username, password, firstName, lastName, photo } = this.state;
+      // deconstruct state object
+      const { username, password, firstName, lastName, photoUri } = this.state;
 
-        // create newUser object to be sent to database
-        const newUser = { username, password, firstName, lastName, photo };
+      // create newUser object to be sent to database
+      const newUser = {
+        username,
+        password,
+        firstName,
+        lastName,
+        photoUri
+      };
 
-        API.registerUser(newUser)
-            .then(res => {
-                console.log("SUCCESSFUL SIGNUP")
-                this.handleLoginRedirect(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+      API.registerUser(newUser)
+          .then(res => {
+              console.log("SUCCESSFUL SIGNUP")
+              this.handleLoginRedirect(res.data)
+          })
+          .catch(err => {
+              console.log(err)
+          })
     }
 
     _pickImage = async () => {
@@ -39,12 +49,11 @@ export default class SignUp extends Component {
             let result = await ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
                 aspect: [4, 3],
+                base64: true
             });
     
-            console.log(result);
-    
             if (!result.cancelled) {
-                this.setState({ photo: result.uri });
+                this.setState({ photoUri: result.uri });
             }
         } else {
             throw new Error('Camera roll permission not granted');
@@ -53,7 +62,7 @@ export default class SignUp extends Component {
 
     handleLoginRedirect = (userObj) => {
         const navigateAction = NavigationActions.navigate({
-          routeName: "Home",
+          routeName: "Login",     
           params: {data: userObj}
         });
         this.props.navigation.dispatch(navigateAction);
@@ -86,18 +95,31 @@ export default class SignUp extends Component {
             
               <Text note style={{marginRight: '20%'}}>{this.state.photo ? "uploaded profile picture" : null}</Text>
             </Item>
-            <Button onPress={this._pickImage} title="Upload from Photo Library" />
+            <Button 
+              onPress={this._pickImage}
+              block
+              style={{ margin: 5, backgroundColor: '#00CE9F' }}
+            >
+              <Text>
+                Upload user picture
+              </Text>
+            </Button>
             <View style={{justifyContent: 'center'}}>
               {/* {this.state.image === null ? null :
                 <Image large source={{ uri: this.state.image }} resizeMethod='scale' resizeMode='contain' style={{width: '100%', height: 200}}/>}   */}
             </View>
             <View>
-               <Button onPress={this.signUp} title="Sign Up" /> 
+              <Button
+                onPress={this.signUp}
+                block
+                style={{ marginLeft: 5, marginRight: 5, backgroundColor: '#00CE9F' }}
+              >
+                <Text>
+                  Sign Up
+                </Text>
+              </Button>
             </View>
           </Form>
-         
-          
-            
         </Content>
       </Container>
     );

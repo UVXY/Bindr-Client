@@ -1,51 +1,60 @@
 import React, { Component } from 'react';
-import { Image, Linking } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Image } from 'react-native';
+import {
+  Content, Card, CardItem, Text, Button, Icon, Body, Right
+} from 'native-base';
 
 export default BookCard = (props) => {
-    const { title, description, imageLinks, image, authors, subtitle } = props.data;
+  const {
+    _id, title, subtitle, image, authors, genre
+  } = props.data;
 
-    return (
-    //   <Container>
-        // <Header />
-        <Content>
-          <Card style={{flex: 0}}>
-            <CardItem>
-                <Thumbnail large source={{ uri: image || imageLinks.thumbnail }} />
-                <Body style={{marginLeft: '3%'}}>
-                  <Text>{title}</Text>
-                  <Text note>{subtitle}</Text>
-                </Body>
-              <Right>
-                <Icon 
-                  onPress={() => {!image ? props.save(props.data) : null}}
-                  name={image ? "remove" : "heart" }/>
-              </Right>           
-            </CardItem>
-            <CardItem>
-                <Body>
-                  <Text>Author(s): {authors}</Text>
-                </Body>
-              </CardItem>
-            <CardItem>
-              <Body>
-                {/* <Image source={{uri: 'Image URL'}} style={{height: 200, width: 200, flex: 1}}/> */}
-                <Text>
-                  Synposis: {description ? description.slice(0, 200) : "Not available"} ... 
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-                <Button 
-                    transparent 
-                    textStyle={{color: '#87838B'}}
-                    onPress={() => props.bookDetail(props.data)}>
-                  <Icon name="navigate" />
-                  <Text>Book Detail</Text>
-                </Button>
-            </CardItem>
-          </Card>
-        </Content>
-    //   </Container>
-    );
-  }
+  return (
+    <Content>
+      <Card style={{ flex: 1 }}>
+        <CardItem>
+          <Image
+            style={{ height: 110, flex: 1, resizeMode: 'contain' }}
+            source={{ uri: image || require('../assets/images/reader-310398_640.png') }}
+          />
+          <Body style={{ marginLeft: '3%' }}>
+            <Text>{title}</Text>
+            <Text note>{subtitle}</Text>
+            <Text>
+              Author(s):
+              {' '}
+              {authors}
+            </Text>
+            <Text>{`Genre: ${genre.join(', ')}`}</Text>
+          </Body>
+          <Right>
+            <Icon
+              onPress={() => {
+                props.unsave(_id);
+                props.handler();
+              }}
+              name="close"
+              style={{ color: '#ED4A6A', marginRight: 20, flex: 1, fontSize: 30 }}
+            />
+          </Right>
+        </CardItem>
+        <CardItem>
+          <Button
+            transparent
+            onPress={() => props.detail(props.data, props.save, props.comment)}
+          >
+            <Icon
+              name="navigate"
+              style={{ color: '#AF33FF' }}
+            />
+            <Text
+              style={{ paddingLeft: 0, color: '#AF33FF' }}
+            >
+              Book Detail
+            </Text>
+          </Button>
+        </CardItem>
+      </Card>
+    </Content>
+  );
+};

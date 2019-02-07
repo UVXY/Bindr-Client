@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sample_native_app",
-    "slug": "sample_native_app",
+    "name": "Bindr-App",
+    "slug": "Bindr-App",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -10,7 +10,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/reader-310398_640.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -24,6 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "extra": {
+      "darkSky": "952f579385c4b8b051afcf58ab405b93",
+      "apiBaseURL": "https://bindr.herokuapp.com"
     }
   }
 }
