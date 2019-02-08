@@ -34,19 +34,21 @@ export default BookCard = (props) => {
                 props.handler();
               }}
               name="close"
-              style={{ color: '#ED4A6A', marginRight: 20, flex: 1 }}
+              style={{ color: '#ED4A6A', marginRight: 20, flex: 1, fontSize: 30 }}
             />
           </Right>
         </CardItem>
         <CardItem>
           <Button
             transparent
-            textStyle={{ color: '#87838B' }}
             onPress={() => props.detail(props.data, props.save, props.comment)}
           >
-            <Icon name="navigate" />
+            <Icon
+              name="navigate"
+              style={{ color: '#AF33FF' }}
+            />
             <Text
-              style={{ paddingLeft: 0 }}
+              style={{ paddingLeft: 0, color: '#AF33FF' }}
             >
               Book Detail
             </Text>

@@ -121,9 +121,9 @@ export default class Wordsearch extends Component {
   render() {
     return (
       <Container style={{ flex: 1 }}>
-        <View style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', alignItems: 'stretch' }}>
-          <Title style={{ fontSize: 20, backgroundColor: '#00CE9F', textAlign: 'left', alignItems: 'stretch' }}>
-                Select two words
+        <View style={{ backgroundColor: '#00CE9F', alignItems: 'stretch' }}>
+          <Title>
+            Select two words
           </Title>
         </View>
         <View style={styles.container}>
