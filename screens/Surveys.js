@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
 import { View } from 'native-base';
-import { StyleSheet, ScrollView } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import PicturePicker from '../components/PicturePicker';
+import { StyleSheet } from 'react-native';
 import Wordsearch from '../components/Wordsearch';
-import API from '../utils/API';
 import Header from '../components/Header';
 
 export default class CardShowcaseExample extends Component {
@@ -13,32 +10,30 @@ export default class CardShowcaseExample extends Component {
     header: Header
   };
 
-  state = {
-    tags:[],
-    user: null
-  }
-
-    picturePicker = () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'PicturePicker'
-    });
-    this.props.navigation.dispatch(navigateAction);
+  goToPicturePicker = (bookTags) => {
+    this.props.navigation.navigate(
+      'PicturePicker',
+      {
+        bookTags,
+        goToRecommendations: this.goToRecommendations
+      }
+    );
   }
 
   goToRecommendations = (bookTags) => {
     this.props.navigation.navigate(
       'Recommendations',
-      { bookTags }
+      {
+        bookTags
+      }
     );
   }
 
   render() {
     return (
-          
-
       <View style={styles.container}>
-        <Wordsearch 
-          goToRecommendations={this.goToRecommendations}
+        <Wordsearch
+          goToPicturePicker={this.goToPicturePicker}
         />
       </View>
     );
@@ -51,5 +46,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#644B62'
-  },
+  }
 });

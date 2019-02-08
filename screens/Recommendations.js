@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform } from 'react-native';
-import { DeckSwiper, View, Text, Title, Button, Content } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { DeckSwiper, View, Text, Title, Button } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { Location, Permissions } from 'expo';
 import axios from 'axios';
 import Header from '../components/Header';
 import RecommendationCard from '../components/RecommendationCard';
 import API from '../utils/API';
-import * as config from '../app.json';
+import { Constants } from "expo";
 
-const apiKey = config.API_KEY;
+const apiKey = Constants.manifest.extra.darkSky;
 
 class Recommendation extends Component {
   static navigationOptions = {
@@ -28,7 +28,6 @@ class Recommendation extends Component {
     this.props.navigation.addListener(
       'willFocus',
       () => {
-        console.log("will focus");
         this.getRecommendations();
       }
     );

@@ -9,7 +9,7 @@ import Surveys from '../screens/Surveys';
 import BookDetail from '../screens/BookDetail';
 import PicturePicker from '../components/PicturePicker';
 import Header from '../components/Header';
-import Wordsearch from '../components/Wordsearch'
+import Wordsearch from '../components/Wordsearch';
 
 const SurveysStack = createStackNavigator({
   Surveys: {
